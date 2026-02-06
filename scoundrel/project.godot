@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Scoundrel"
+run/main_scene="uid://di40bos10u5gf"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
