@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://di40bos10u5gf"]
+
+[ext_resource type="Script" uid="uid://clqgq1n7v0ar" path="res://addons/card-framework/card_manager.gd" id="1_lnu2h"]
+[ext_resource type="Script" uid="uid://6ams8uvg43gu" path="res://addons/card-framework/pile.gd" id="2_lbhrr"]
+[ext_resource type="Script" uid="uid://dj46jo3lfbclo" path="res://addons/card-framework/hand.gd" id="3_iywne"]
+
+[node name="Game" type="Node2D" unique_id=1029340159]
+
+[node name="CardManager" type="Control" parent="." unique_id=1176049217]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_lnu2h")
+debug_mode = true
+metadata/_custom_type_script = "uid://clqgq1n7v0ar"
+
+[node name="Deck" type="Control" parent="." unique_id=1649373895]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_lbhrr")
+metadata/_custom_type_script = "uid://6ams8uvg43gu"
+
+[node name="Hand" type="Control" parent="." unique_id=452387566]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("3_iywne")
+metadata/_custom_type_script = "uid://dj46jo3lfbclo"
+
+[node name="Discard" type="Control" parent="." unique_id=412322329]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_lbhrr")
+metadata/_custom_type_script = "uid://6ams8uvg43gu"

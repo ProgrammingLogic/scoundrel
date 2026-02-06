@@ -1,0 +1,7 @@
+{
+    "name": "spade_Q",
+    "front_image": "card_spades_Q.png",
+    "suit": "spade",
+    "value": "Q",
+    "color": "black"
+}

@@ -1,0 +1,7 @@
+{
+    "name": "diamond_Q",
+    "front_image": "card_diamonds_Q.png",
+    "suit": "diamond",
+    "value": "Q",
+    "color": "red"
+}

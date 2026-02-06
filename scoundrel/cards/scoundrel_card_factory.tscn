@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://bg0g7gi0vurlr"]
+
+[ext_resource type="Script" uid="uid://8n36yadkvxai" path="res://addons/card-framework/json_card_factory.gd" id="1_wx1f7"]
+
+[node name="JsonCardFactory" type="Node" unique_id=1744745028]
+script = ExtResource("1_wx1f7")
+metadata/_custom_type_script = "uid://8n36yadkvxai"
