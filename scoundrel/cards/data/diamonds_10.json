@@ -1,0 +1,7 @@
+{
+    "name": "diamond_10",
+    "front_image": "diamonds_10.png",
+    "suit": "diamond",
+    "value": "10",
+    "color": "red"
+}
