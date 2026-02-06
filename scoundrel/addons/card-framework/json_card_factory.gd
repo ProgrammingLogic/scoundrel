@@ -8,7 +8,7 @@
 ##
 ## Key Features:
 ## - JSON-based card data definition with flexible schema
-## - Automatic asset loading and texture management  
+## - Automatic asset loading and texture management
 ## - Performance-optimized data caching for rapid card creation
 ## - Comprehensive error handling with detailed logging
 ## - Directory scanning for bulk card data preloading
@@ -20,7 +20,7 @@
 ## ├── card_assets/          # card_asset_dir
 ## │   ├── ace_spades.png
 ## │   └── king_hearts.png
-## ├── card_data/            # card_info_dir  
+## ├── card_data/            # card_info_dir
 ## │   ├── ace_spades.json   # Matches asset filename
 ## │   └── king_hearts.json
 ## [/codeblock]
@@ -29,7 +29,7 @@
 ## [codeblock]
 ## {
 ##   "name": "ace_spades",
-##   "front_image": "ace_spades.png", 
+##   "front_image": "ace_spades.png",
 ##   "suit": "spades",
 ##   "value": "ace"
 ## }
@@ -41,7 +41,7 @@ extends CardFactory
 ## Base card scene to instantiate for each card (must inherit from Card class)
 @export var default_card_scene: PackedScene
 
-@export_group("asset_paths") 
+@export_group("asset_paths")
 ## Directory path containing card image assets (PNG, JPG, etc.)
 @export var card_asset_dir: String
 ## Directory path containing card information JSON files
@@ -58,7 +58,7 @@ func _ready() -> void:
 	if default_card_scene == null:
 		push_error("default_card_scene is not assigned!")
 		return
-		
+
 	# Validate that default_card_scene produces Card instances
 	var temp_instance = default_card_scene.instantiate()
 	if not (temp_instance is Card):
@@ -89,7 +89,7 @@ func create_card(card_name: String, target: CardContainer) -> Card:
 		if not card_info.has("front_image"):
 			push_error("Card info does not contain 'front_image' key for card: %s" % card_name)
 			return null
-			
+
 		# Load corresponding image asset
 		var front_image_path = card_asset_dir + "/" + card_info["front_image"]
 		var front_image = _load_image(front_image_path)
@@ -138,7 +138,7 @@ func preload_card_data() -> void:
 			"texture": front_image_texture
 		}
 		print("Preloaded card data:", preloaded_cards[card_name])
-		
+
 		file_name = dir.get_next()
 
 
@@ -184,22 +184,22 @@ func _load_image(image_path: String) -> Texture2D:
 ## @returns: Configured Card instance or null if addition failed
 func _create_card_node(card_name: String, front_image: Texture2D, target: CardContainer, card_info: Dictionary) -> Card:
 	var card = _generate_card(card_info)
-	
+
 	# Validate container can accept this card
 	if !target._card_can_be_added([card]):
 		print("Card cannot be added: %s" % card_name)
 		card.queue_free()
 		return null
-	
+
 	# Configure card properties
 	card.card_info = card_info
 	card.card_size = card_size
-	
+
 	# Add to scene tree and container
 	var cards_node = target.get_node("Cards")
 	cards_node.add_child(card)
 	target.add_card(card)
-	
+
 	# Set card identity and textures
 	card.card_name = card_name
 	card.set_faces(front_image, back_image)

@@ -75,7 +75,7 @@ func _ready() -> void:
 		cards_node.name = "Cards"
 		cards_node.mouse_filter = Control.MOUSE_FILTER_PASS
 		add_child(cards_node)
-	
+
 	# Find and register with CardManager (requires CardManager to be positioned above CardContainers in scene tree)
 	_find_and_register_card_manager()
 
@@ -136,10 +136,10 @@ func check_card_can_be_dropped(cards: Array) -> bool:
 
 	if drop_zone.accept_types.has(CardManager.CARD_ACCEPT_TYPE) == false:
 		return false
-		
+
 	if not drop_zone.check_mouse_is_in_drop_zone():
 		return false
-		
+
 	return _card_can_be_added(cards)
 
 
@@ -187,12 +187,12 @@ func undo(cards: Array, from_indices: Array = []) -> void:
 		# Fallback to basic undo
 		_move_cards(cards)
 		return
-	
+
 	# Fallback: add to end if no index info available
 	if from_indices.is_empty():
 		_move_cards(cards)
 		return
-	
+
 	# Validate all indices are valid
 	for i in range(from_indices.size()):
 		if from_indices[i] < 0:
@@ -200,7 +200,7 @@ func undo(cards: Array, from_indices: Array = []) -> void:
 			# Fallback to basic undo
 			_move_cards(cards)
 			return
-	
+
 	# Check if indices are consecutive (bulk move scenario)
 	var sorted_indices = from_indices.duplicate()
 	sorted_indices.sort()
@@ -209,19 +209,19 @@ func undo(cards: Array, from_indices: Array = []) -> void:
 		if sorted_indices[i] != sorted_indices[i-1] + 1:
 			is_consecutive = false
 			break
-	
+
 	if is_consecutive and sorted_indices.size() > 1:
 		# Bulk consecutive restore: maintain original relative order
 		var lowest_index = sorted_indices[0]
-		
+
 		# Sort cards by their original indices to maintain proper order
 		var card_index_pairs = []
 		for i in range(cards.size()):
 			card_index_pairs.append({"card": cards[i], "index": from_indices[i]})
-		
+
 		# Sort by index ascending to maintain original order
 		card_index_pairs.sort_custom(func(a, b): return a.index < b.index)
-		
+
 		# Insert all cards starting from the lowest index
 		for i in range(card_index_pairs.size()):
 			var target_index = min(lowest_index + i, _held_cards.size())
@@ -231,14 +231,14 @@ func undo(cards: Array, from_indices: Array = []) -> void:
 		var card_index_pairs = []
 		for i in range(cards.size()):
 			card_index_pairs.append({"card": cards[i], "index": from_indices[i], "original_order": i})
-		
+
 		# Sort by index descending, then by original order ascending for stable sorting
-		card_index_pairs.sort_custom(func(a, b): 
+		card_index_pairs.sort_custom(func(a, b):
 			if a.index == b.index:
 				return a.original_order < b.original_order
 			return a.index > b.index
 		)
-		
+
 		# Restore each card to its original index
 		for pair in card_index_pairs:
 			var target_index = min(pair.index, _held_cards.size())  # Clamp to valid range
@@ -290,7 +290,7 @@ func _insert_card_to_container(card: Card, index: int) -> void:
 		elif index > _held_cards.size():
 			index = _held_cards.size()
 		_held_cards.insert(index, card)
-	update_card_ui()	
+	update_card_ui()
 
 
 func _move_to_card_container(_card: Card, index: int = -1) -> void:
