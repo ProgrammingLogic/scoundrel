@@ -8,6 +8,7 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_d81rb")
+card_size = Vector2(64, 64)
 front_face_texture = NodePath("FrontFace/TextureRect")
 back_face_texture = NodePath("BackFace/TextureRect")
 metadata/_custom_type_script = "uid://dtpomjc0u41g"

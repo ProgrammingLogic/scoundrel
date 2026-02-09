@@ -1,7 +1,7 @@
 {
-    "name": "club_5",
-    "front_image": "clubs_5.png",
-    "suit": "club",
-    "value": "5",
-    "color": "black"
+	"name": "club_5",
+	"front_image": "clubs_5.png",
+	"suit": "club",
+	"value": "5",
+	"color": "black"
 }
