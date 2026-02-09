@@ -1,6 +1,15 @@
 [gd_scene format=3 uid="uid://di40bos10u5gf"]
 
-[node name="Game" type="Node2D" unique_id=1029340159]
+[ext_resource type="Script" uid="uid://dhdcpgfakuls6" path="res://scenes/game.gd" id="1_iywne"]
+
+[node name="Game" type="Control" unique_id=1567249584]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_iywne")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=991896305]
 zoom = Vector2(0.5, 0.5)

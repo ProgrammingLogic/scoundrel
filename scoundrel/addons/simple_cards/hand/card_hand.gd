@@ -21,8 +21,8 @@ signal arrangement_started()
 ##Emitted after arrange_cards() completes
 signal arrangement_completed()
 
-##Shape of card spread. 
-@export var shape: CardHandShape 
+##Shape of card spread.
+@export var shape: CardHandShape
 ##If [code]true[/code] the hand will reorder after any change in the cards.
 @export var enable_reordering: bool = true
 ##Maximum number of cards allowed in the hand. Set to -1 for no limit.
@@ -40,7 +40,7 @@ func _ready() -> void:
 	if !shape:
 		shape = LineHandShape.new()
 		push_warning("No shape selected, using default")
-	
+
 	var children = get_children()
 	for child in children:
 		if child is Card:
@@ -48,7 +48,7 @@ func _ready() -> void:
 	CG.dropped_card.connect(_on_card_dropped)
 	CG.holding_card.connect(_on_holding_card)
 
-	
+
 	set_process(false)
 
 func _process(_delta: float) -> void:
@@ -65,7 +65,7 @@ func add_card(card: Card) -> bool:
 	if max_hand_size >= 0 and cards.size() >= max_hand_size:
 		hand_full.emit()
 		return false
-	
+
 	if card.get_parent() != self:
 		if card.get_parent():
 			if card.get_parent() is CardHand:
@@ -74,16 +74,16 @@ func add_card(card: Card) -> bool:
 				card.reparent(self)
 		else:
 			add_child(card)
-	
+
 	if !cards.has(card):
 		cards.append(card)
 		_connect_card_signals(card)
 		var index = cards.size() - 1
 		card_added.emit(card, index)
-		
+
 		if max_hand_size >= 0 and cards.size() >= max_hand_size:
 			hand_full.emit()
-	
+
 	arrange_cards()
 	return true
 
@@ -94,7 +94,7 @@ func remove_card(card: Card, new_parent: Node = null) -> void:
 		var index = cards.find(card)
 		_disconnect_card_signals(card)
 		cards.erase(card)
-		
+
 		if card.get_parent() == self:
 			if new_parent:
 				card.reparent(new_parent)
@@ -102,9 +102,9 @@ func remove_card(card: Card, new_parent: Node = null) -> void:
 				var stored_global_pos = card.global_position
 				remove_child(card)
 				card.global_position = stored_global_pos
-		
+
 		card_removed.emit(card, index)
-		
+
 		if cards.is_empty():
 			hand_empty.emit()
 
@@ -116,14 +116,14 @@ func clear_hand() -> void:
 	var cards_copy = cards.duplicate()
 	cards.clear()
 	_card_positions.clear()
-	
+
 	for card in cards_copy:
 		_disconnect_card_signals(card)
 		if card.get_parent() == self:
 			var stored_global_pos = card.global_position
 			remove_child(card)
 			card.global_position = stored_global_pos
-	
+
 	hand_cleared.emit()
 	hand_empty.emit()
 
@@ -152,7 +152,7 @@ func _on_card_focused(card: Card) -> void:
 	if _dragged_card != null:
 		return
 	card.z_index = 900
-	
+
 
 func _on_card_unfocused(card: Card) -> void:
 	if _dragged_card != null:
@@ -169,12 +169,12 @@ func _finish_card_drop() -> void:
 		if cards.has(_dragged_card):
 			_disconnect_card_signals(_dragged_card)
 			cards.erase(_dragged_card)
-	
+
 	arrange_cards()
 	_dragged_card = null
 	_drag_start_index = -1
 	_last_reorder_index = -1
-	
+
 	set_process(false)
 
 
@@ -183,14 +183,14 @@ func _on_holding_card(card: Card) -> void:
 		_dragged_card = card
 		_drag_start_index = get_card_index(card)
 		_last_reorder_index = _drag_start_index
-		
+
 		if enable_reordering:
 			set_process(true)
 	else:
 		_dragged_card = null
 		_drag_start_index = -1
 		_last_reorder_index = -1
-		
+
 		set_process(false)
 
 
@@ -207,22 +207,22 @@ func _handle_clicked_card(card: Card) -> void:
 func _update_card_reordering() -> void:
 	if not _dragged_card or _drag_start_index == -1:
 		return
-	
+
 	if not _dragged_card.holding:
 		return
-	
+
 	var cursor_pos = CG.get_cursor_position()
 	var new_index = _find_insertion_index(cursor_pos)
-	
+
 	if new_index != -1 and new_index != _drag_start_index:
 		cards.remove_at(_drag_start_index)
 		cards.insert(new_index, _dragged_card)
-		
+
 		card_position_changed.emit(_dragged_card, _drag_start_index, new_index)
-		
+
 		_drag_start_index = new_index
 		_last_reorder_index = new_index
-		
+
 		_arrange_cards_except_dragged()
 
 
@@ -230,7 +230,7 @@ func _find_insertion_index(cursor_pos: Vector2) -> int:
 	##Determine insertion index based on cursor passing card centers.
 	if cards.size() <= 1:
 		return 0
-	
+
 	var other_cards: Array[Dictionary] = []
 	for i in range(cards.size()):
 		var card = cards[i]
@@ -239,30 +239,30 @@ func _find_insertion_index(cursor_pos: Vector2) -> int:
 				"card": card,
 				"index": i
 			})
-	
+
 	if other_cards.is_empty():
 		return 0
-	
+
 	var current_slot := 0
 	for i in range(other_cards.size()):
 		if other_cards[i].index > _drag_start_index:
 			break
 		current_slot = i + 1
-	
+
 	if current_slot > 0:
 		var left_card: Card = other_cards[current_slot - 1].card
 		var left_center_x = left_card.global_position.x + left_card.center_pos.x
-		
+
 		if cursor_pos.x < left_center_x:
 			return other_cards[current_slot - 1].index
-	
+
 	if current_slot < other_cards.size():
 		var right_card: Card = other_cards[current_slot].card
 		var right_center_x = right_card.global_position.x + right_card.center_pos.x
-		
+
 		if cursor_pos.x > right_center_x:
 			return other_cards[current_slot].index
-	
+
 	return _drag_start_index
 
 #endregion
@@ -274,16 +274,16 @@ func _find_insertion_index(cursor_pos: Vector2) -> int:
 func arrange_cards() -> void:
 	if cards.is_empty():
 		return
-	
+
 	arrangement_started.emit()
-	
+
 	_card_positions.clear()
-	
+
 	_card_positions = shape.arrange_cards(cards, self)
-	
+
 	_update_z_indices()
 	_update_focus_chain()
-	
+
 	cards_reordered.emit(cards)
 	arrangement_completed.emit()
 
@@ -291,16 +291,16 @@ func arrange_cards() -> void:
 func _arrange_cards_except_dragged() -> void:
 	if cards.is_empty():
 		return
-	
+
 	arrangement_started.emit()
-	
+
 	_card_positions.clear()
-	
+
 	_card_positions = shape.arrange_cards(cards, self, [_dragged_card])
 
 	_update_z_indices()
 	_update_focus_chain()
-	
+
 	arrangement_completed.emit()
 
 #endregion
@@ -316,14 +316,14 @@ func _update_focus_chain() -> void:
 	var card_count = cards.size()
 	if card_count == 0:
 		return
-	
+
 	for i in card_count:
 		var card = cards[i]
-		
+
 		var prev_index = (i - 1 + card_count) % card_count
 		card.focus_neighbor_left = card.get_path_to(cards[prev_index])
 		card.focus_previous = card.get_path_to(cards[prev_index])
-		
+
 		var next_index = (i + 1) % card_count
 		card.focus_neighbor_right = card.get_path_to(cards[next_index])
 		card.focus_next = card.get_path_to(cards[next_index])
@@ -336,7 +336,7 @@ func add_cards(card_array: Array[Card]) -> int:
 		if max_hand_size >= 0 and cards.size() >= max_hand_size:
 			hand_full.emit()
 			break
-		
+
 		if card.get_parent() != self:
 			if card.get_parent() is CardHand:
 				card.get_parent().remove_card(card, self)
@@ -344,12 +344,12 @@ func add_cards(card_array: Array[Card]) -> int:
 				card.reparent(self)
 			else:
 				add_child(card)
-		
+
 		if not cards.has(card):
 			cards.append(card)
 			_connect_card_signals(card)
 			added_count += 1
-	
+
 	arrange_cards()
 	return added_count
 

@@ -11,20 +11,10 @@
 		"layout_id": "default",
 		"tags": []
 	},
-	"res://examples/balatro_style/standard_back_layout.tscn": {
+	"res://cards/scoundrel_card_layout.tscn": {
 		"enabled": true,
-		"last_modified": 1768556001,
-		"layout_id": "standard_back_layout",
-		"tags": [
-			"back"
-		]
-	},
-	"res://examples/balatro_style/standard_layout.tscn": {
-		"enabled": true,
-		"last_modified": 1768891437,
-		"layout_id": "standard_layout",
-		"tags": [
-			"front"
-		]
+		"last_modified": 1770671005,
+		"layout_id": "scoundrel_card_layout",
+		"tags": []
 	}
 }

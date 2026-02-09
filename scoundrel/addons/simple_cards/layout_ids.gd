@@ -5,8 +5,7 @@ class_name LayoutID
 
 const DEFAULT: StringName = &"default"
 const DEFAULT_BACK: StringName = &"default_back"
-const STANDARD_BACK_LAYOUT: StringName = &"standard_back_layout"
-const STANDARD_LAYOUT: StringName = &"standard_layout"
+const SCOUNDREL_CARD_LAYOUT: StringName = &"scoundrel_card_layout"
 
 
 ## Returns all available layout IDs
@@ -14,8 +13,7 @@ static func get_all() -> Array[StringName]:
 	return [
 		DEFAULT,
 		DEFAULT_BACK,
-		STANDARD_BACK_LAYOUT,
-		STANDARD_LAYOUT
+		SCOUNDREL_CARD_LAYOUT
 	]
 
 
