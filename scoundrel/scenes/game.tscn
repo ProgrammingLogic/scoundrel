@@ -1,6 +1,17 @@
 [gd_scene format=3 uid="uid://di40bos10u5gf"]
 
 [ext_resource type="Script" uid="uid://dhdcpgfakuls6" path="res://scenes/game.gd" id="1_iywne"]
+[ext_resource type="Script" uid="uid://bisyk4bowdvsf" path="res://addons/simple_cards/deck/manager/card_deck_manager.gd" id="2_u5sy4"]
+[ext_resource type="Script" uid="uid://bbi8i6vef3f6y" path="res://addons/simple_cards/hand/card_hand.gd" id="2_yqjtg"]
+[ext_resource type="Resource" uid="uid://bntl2xy4v551f" path="res://cards/scoundrel_card_deck.tres" id="3_iywne"]
+[ext_resource type="Script" uid="uid://qd3kangeiqg" path="res://addons/simple_cards/hand/shape/premade_shapes/grid_shape.gd" id="3_lnu2h"]
+
+[sub_resource type="Resource" id="Resource_lbhrr"]
+script = ExtResource("3_lnu2h")
+num_of_cols = 4
+num_of_rows = 1
+arrange_by_rows = false
+metadata/_custom_type_script = "uid://qd3kangeiqg"
 
 [node name="Game" type="Control" unique_id=1567249584]
 layout_mode = 3
@@ -12,4 +23,41 @@ grow_vertical = 2
 script = ExtResource("1_iywne")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=991896305]
-zoom = Vector2(0.5, 0.5)
+anchor_mode = 0
+
+[node name="CardDeckManager" type="Node" parent="." unique_id=1122825445]
+unique_name_in_owner = true
+script = ExtResource("2_u5sy4")
+deck = ExtResource("3_iywne")
+auto_setup = true
+metadata/_custom_type_script = "uid://bisyk4bowdvsf"
+
+[node name="Deck" type="Control" parent="." unique_id=459379156]
+unique_name_in_owner = true
+layout_mode = 1
+anchor_left = 0.35
+anchor_top = 0.4
+anchor_right = 0.4
+anchor_bottom = 0.6
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_yqjtg")
+metadata/_custom_type_script = "uid://bbi8i6vef3f6y"
+
+[node name="Room" type="Control" parent="." unique_id=158004445]
+unique_name_in_owner = true
+layout_mode = 1
+anchor_left = 0.4
+anchor_top = 0.4
+anchor_right = 0.6
+anchor_bottom = 0.6
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_yqjtg")
+shape = SubResource("Resource_lbhrr")
+max_hand_size = 4
+metadata/_custom_type_script = "uid://bbi8i6vef3f6y"

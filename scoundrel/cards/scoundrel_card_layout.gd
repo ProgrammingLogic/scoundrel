@@ -1,11 +1,10 @@
 extends CardLayout
 
-@onready var name_label: Label = %NameLabel
-@onready var image: TextureRect = %CardImage
+@onready var texture_rect: TextureRect = %TextureRect
 
 func _update_display() -> void:
 	var data = card_resource as ScoundrelCardResource
+	if not data:
+		return
 
-	if data:
-		name_label.text = data.card_name
-		image.texture = data.card_image
+	texture_rect.texture = data.image
