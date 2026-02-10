@@ -3,20 +3,52 @@ extends Control
 
 @onready var cards: Array[Card]
 @onready var room: CardHand = %Room
-@onready var deck: CardHand = %Deck
-
 @onready var card_deck_manager: CardDeckManager = %CardDeckManager
 
-signal game_won
-signal game_lost
+
+enum Cards {
+	ACE = 14,
+	KING = 13,
+	QUEEN = 12,
+	JOKER = 11,
+}
 
 
 func _ready() -> void:
 	CG.def_front_layout = LayoutID.DEFAULT_BACK
 	CG.def_back_layout = LayoutID.SCOUNDREL_CARD_LAYOUT
 
+	fill_deck(card_deck_manager.deck)
 	card_deck_manager.setup()
 	fill_room()
+
+
+## Fills the deck according to Scoundral's standard deck format.
+##
+## Scoundrel's standard deck format:
+## - Remove all red face cards & aces
+## - Remove any Jokers
+##
+## Input:
+## - deck: CardDeck -> The deck to setup.
+##
+## Output:
+## - None
+func fill_deck(deck: CardDeck) -> void:
+	var suites = ["hearts", "diamonds", "clubs", "spades"]
+	var values = [2, 3, 4, 5, 6, 7, 8, 9, 10,
+		Cards.JOKER, Cards.QUEEN, Cards.KING, Cards.ACE]
+
+	for suite in suites:
+		for value in values:
+			if suite in ["hearts", "diamonds"] and value > 10:
+				continue
+
+			var card = ScoundrelCardResource.new()
+			card.value = value
+			card.suite = suite
+
+			deck.add_card(card)
 
 
 ## Fills the room with cards from the deck.
@@ -25,12 +57,6 @@ func fill_room() -> void:
 	assert(to_draw > 0)
 
 	var deck_size = card_deck_manager.get_pile_size(CardDeck.Pile.DRAW)
-
-	# We've won if all of the cards in the deck have been cycled through.
-	if to_draw > deck_size:
-		print("we won!")
-		game_won.emit(to_draw - deck_size)
-		return
 
 	room.add_cards(card_deck_manager.draw_cards(to_draw))
 

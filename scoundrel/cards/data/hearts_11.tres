@@ -1,8 +1,0 @@
-[gd_resource type="Resource" script_class="ScoundrelCardResource" format=3]
-
-[ext_resource type="Script" path="res://cards/scoundrel_card.gd" id="1_w8oqx"]
-
-[resource]
-script = ExtResource("1_w8oqx")
-value = 11
-suite = "hearts"
