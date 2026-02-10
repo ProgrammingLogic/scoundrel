@@ -2,8 +2,19 @@
 
 [ext_resource type="Script" uid="uid://cubhjjnwvxhjc" path="res://cards/scoundrel_card_layout.gd" id="1_sefbb"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sefbb"]
+bg_color = Color(0.9019608, 0.9019608, 0.9019608, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+corner_detail = 20
+shadow_color = Color(0, 0, 0, 1)
+shadow_size = 4
+
 [node name="CardLayout" type="SubViewportContainer" unique_id=750627426]
-anchors_preset = -1
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -25,18 +36,31 @@ handle_input_locally = false
 size = Vector2i(80, 112)
 render_target_update_mode = 4
 
-[node name="TextureRect" type="TextureRect" parent="SubViewport" unique_id=311800384]
+[node name="CardBackground" type="Panel" parent="SubViewport" unique_id=2118784144]
 unique_name_in_owner = true
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_sefbb")
 
-[node name="Label" type="Label" parent="SubViewport/TextureRect" unique_id=1959331066]
-layout_mode = 0
-offset_top = 42.0
-offset_right = 76.0
-offset_bottom = 65.0
-text = "Front"
-horizontal_alignment = 1
+[node name="CardValue" type="Label" parent="SubViewport" unique_id=1964292995]
+unique_name_in_owner = true
+anchors_preset = -1
+offset_left = 3.0
+offset_top = -1.0
+text = "10"
+
+[node name="CardSuite" type="Label" parent="SubViewport" unique_id=948733633]
+unique_name_in_owner = true
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -3.0
+offset_bottom = -2.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "♣️"

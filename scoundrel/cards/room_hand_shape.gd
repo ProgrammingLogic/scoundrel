@@ -1,6 +1,8 @@
 class_name RoomHandShape extends CardHandShape
 ## A custom hand shape for Scoundrel's rooms.
 
+@export var horizontal_margin: int
+
 const NUM_OF_COLUMNS = 4
 
 func arrange_cards(cards: Array[Card], hand: CardHand, skipped_cards: Array[Card] = []) -> Array[Vector2]:
@@ -20,9 +22,10 @@ func arrange_cards(cards: Array[Card], hand: CardHand, skipped_cards: Array[Card
 	for i: int in card_count:
 		var card := cards[i]
 		var grid_index = i / actual_columns
+		var offset_x = grid_index * (card_size_x + horizontal_margin)
 
 		var card_position = Vector2(
-			grid_starting_position.x + (grid_index * card_size_x),
+			grid_starting_position.x + offset_x,
 			grid_starting_position.y,
 		)
 
