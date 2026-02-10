@@ -4,7 +4,6 @@ extends CardLayout
 
 func _update_display() -> void:
 	var data = card_resource as ScoundrelCardResource
-	if not data:
-		return
+	assert(data)
 
 	texture_rect.texture = data.image

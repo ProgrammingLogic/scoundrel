@@ -11,9 +11,15 @@
 		"layout_id": "default",
 		"tags": []
 	},
+	"res://cards/scoundral_back_card_layout.tscn": {
+		"enabled": true,
+		"last_modified": 1770683092,
+		"layout_id": "scoundral_back_card_layout",
+		"tags": []
+	},
 	"res://cards/scoundrel_card_layout.tscn": {
 		"enabled": true,
-		"last_modified": 1770671005,
+		"last_modified": 1770682933,
 		"layout_id": "scoundrel_card_layout",
 		"tags": []
 	}
