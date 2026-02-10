@@ -3,4 +3,3 @@ class_name ScoundrelCardResource extends CardResource
 
 @export var value: int = 0
 @export var suite: String = ""
-@export var image: Texture2D

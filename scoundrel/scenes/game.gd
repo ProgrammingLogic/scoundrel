@@ -53,10 +53,8 @@ func create_resource_cards(image_dir: String) -> void:
 		var base_name := file.split(".")[0]
 		var suite = base_name.split("_")[0]
 		var value = base_name.split("_")[1]
-		var image = file
 
 		var resource = ScoundrelCardResource.new()
-		resource.image = load(image)
 		resource.suite = suite
 		resource.value = value as int
 		ResourceSaver.save(resource, "res://cards/data/%s.tres" % [base_name])

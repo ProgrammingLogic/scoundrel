@@ -1,10 +1,8 @@
-[gd_resource type="Resource" script_class="ScoundrelCardResource" format=3 uid="uid://cw18c1q0lvbw2"]
+[gd_resource type="Resource" script_class="ScoundrelCardResource" format=3]
 
-[ext_resource type="Texture2D" uid="uid://csyx3fnaap3j" path="res://cards/images/hearts_12.png" id="1_dawty"]
-[ext_resource type="Script" uid="uid://v2vcg0rvqgwi" path="res://cards/scoundrel_card.gd" id="1_xjp3v"]
+[ext_resource type="Script" path="res://cards/scoundrel_card.gd" id="1_xjp3v"]
 
 [resource]
 script = ExtResource("1_xjp3v")
 value = 12
 suite = "hearts"
-image = ExtResource("1_dawty")
