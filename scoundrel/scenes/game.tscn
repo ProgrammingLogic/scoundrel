@@ -1,184 +1,124 @@
 [gd_scene format=3 uid="uid://di40bos10u5gf"]
 
-[ext_resource type="Script" uid="uid://d2e2ay1hgsp06" path="res://scenes/game.gd" id="1_iywne"]
-[ext_resource type="Script" uid="uid://clqgq1n7v0ar" path="res://addons/card-framework/card_manager.gd" id="1_lnu2h"]
-[ext_resource type="PackedScene" uid="uid://bg0g7gi0vurlr" path="res://cards/scoundrel_card_factory.tscn" id="2_iywne"]
-[ext_resource type="Script" uid="uid://6ams8uvg43gu" path="res://addons/card-framework/pile.gd" id="2_lbhrr"]
-[ext_resource type="Script" uid="uid://dj46jo3lfbclo" path="res://addons/card-framework/hand.gd" id="3_iywne"]
+[ext_resource type="Script" uid="uid://dhdcpgfakuls6" path="res://scenes/game.gd" id="1_iywne"]
+[ext_resource type="Script" uid="uid://bisyk4bowdvsf" path="res://addons/simple_cards/deck/manager/card_deck_manager.gd" id="2_u5sy4"]
+[ext_resource type="Script" uid="uid://bbi8i6vef3f6y" path="res://addons/simple_cards/hand/card_hand.gd" id="2_yqjtg"]
+[ext_resource type="Script" uid="uid://c8315v58tr66b" path="res://addons/simple_cards/card/card_resource/card_resource.gd" id="3_gee14"]
+[ext_resource type="Script" uid="uid://qd3kangeiqg" path="res://addons/simple_cards/hand/shape/premade_shapes/grid_shape.gd" id="3_lnu2h"]
+[ext_resource type="Resource" uid="uid://dqhjadn1okpbm" path="res://cards/data/clubs_10.tres" id="4_bk1p3"]
+[ext_resource type="Resource" uid="uid://kaa3p3vpb6ws" path="res://cards/data/clubs_11.tres" id="5_n8ral"]
+[ext_resource type="Script" uid="uid://lhb5ry3o8icy" path="res://addons/simple_cards/deck/card_deck.gd" id="5_vtaks"]
+[ext_resource type="Resource" uid="uid://dualtuj6w8l7q" path="res://cards/data/clubs_12.tres" id="6_yd4ix"]
+[ext_resource type="Resource" uid="uid://duds06npvq7ar" path="res://cards/data/clubs_13.tres" id="7_66xif"]
+[ext_resource type="Resource" uid="uid://bes64kckeand3" path="res://cards/data/clubs_14.tres" id="8_bnuda"]
+[ext_resource type="Resource" uid="uid://b1tvke8mgk76s" path="res://cards/data/clubs_2.tres" id="9_0rmfi"]
+[ext_resource type="Resource" uid="uid://biqqf1q28240s" path="res://cards/data/clubs_3.tres" id="10_xbak0"]
+[ext_resource type="Resource" uid="uid://becv7h2lelf3q" path="res://cards/data/clubs_4.tres" id="11_3x28f"]
+[ext_resource type="Resource" uid="uid://b3xbnnxrfupku" path="res://cards/data/clubs_5.tres" id="12_l6q63"]
+[ext_resource type="Resource" uid="uid://chjobslwqypy5" path="res://cards/data/clubs_6.tres" id="13_mmvbu"]
+[ext_resource type="Resource" uid="uid://dwx6burd354m8" path="res://cards/data/clubs_7.tres" id="14_weeiq"]
+[ext_resource type="Resource" uid="uid://ch5bsbygdpcso" path="res://cards/data/clubs_8.tres" id="15_uxocx"]
+[ext_resource type="Resource" uid="uid://cctb467kf1vof" path="res://cards/data/clubs_9.tres" id="16_7nv0b"]
+[ext_resource type="Resource" uid="uid://wado8hksu6ac" path="res://cards/data/diamonds_10.tres" id="17_o8oq8"]
+[ext_resource type="Resource" uid="uid://dvsxlnmi6bn0d" path="res://cards/data/diamonds_11.tres" id="18_sxt1d"]
+[ext_resource type="Resource" uid="uid://ckkecf04y8urv" path="res://cards/data/diamonds_12.tres" id="19_2iuns"]
+[ext_resource type="Resource" uid="uid://c02ghxr5pdg07" path="res://cards/data/diamonds_13.tres" id="20_7gkqi"]
+[ext_resource type="Resource" uid="uid://dpjijrqf4pj25" path="res://cards/data/diamonds_14.tres" id="21_753oq"]
+[ext_resource type="Resource" uid="uid://coetxhcld7pl" path="res://cards/data/diamonds_2.tres" id="22_3x338"]
+[ext_resource type="Resource" uid="uid://coh2fupkmc1ca" path="res://cards/data/diamonds_3.tres" id="23_1yg85"]
+[ext_resource type="Resource" uid="uid://jevyj47ty2oj" path="res://cards/data/diamonds_4.tres" id="24_s0g06"]
+[ext_resource type="Resource" uid="uid://8d80pv1m8sl7" path="res://cards/data/diamonds_5.tres" id="25_2gnni"]
+[ext_resource type="Resource" uid="uid://cqrfvfo05e1c0" path="res://cards/data/diamonds_6.tres" id="26_vgxg3"]
+[ext_resource type="Resource" uid="uid://dx5wso5ul35il" path="res://cards/data/diamonds_7.tres" id="27_4nbsr"]
+[ext_resource type="Resource" uid="uid://cmgup7dqr6vy1" path="res://cards/data/diamonds_8.tres" id="28_fkywm"]
+[ext_resource type="Resource" uid="uid://cbbmv78l7pqpa" path="res://cards/data/diamonds_9.tres" id="29_dku7i"]
+[ext_resource type="Resource" uid="uid://c5q8nousyliqa" path="res://cards/data/hearts_10.tres" id="30_veaf0"]
+[ext_resource type="Resource" uid="uid://buhei2hdeefgc" path="res://cards/data/hearts_11.tres" id="31_flw08"]
+[ext_resource type="Resource" uid="uid://cw18c1q0lvbw2" path="res://cards/data/hearts_12.tres" id="32_84hbc"]
+[ext_resource type="Resource" uid="uid://42qrw3dt257m" path="res://cards/data/hearts_13.tres" id="33_15b3c"]
+[ext_resource type="Resource" uid="uid://bevwiyct6rcxu" path="res://cards/data/hearts_14.tres" id="34_veukt"]
+[ext_resource type="Resource" uid="uid://c0bj3nv4cjk0m" path="res://cards/data/hearts_2.tres" id="35_nbjts"]
+[ext_resource type="Resource" uid="uid://bvt6068kqt6pc" path="res://cards/data/hearts_3.tres" id="36_i1hsc"]
+[ext_resource type="Resource" uid="uid://c57scy0oy1tgu" path="res://cards/data/hearts_4.tres" id="37_ounyb"]
+[ext_resource type="Resource" uid="uid://bg6yra543os6i" path="res://cards/data/hearts_5.tres" id="38_iekjf"]
+[ext_resource type="Resource" uid="uid://dubdfvxm4yas3" path="res://cards/data/hearts_6.tres" id="39_okmmv"]
+[ext_resource type="Resource" uid="uid://cuwj3k4ynr6vx" path="res://cards/data/hearts_7.tres" id="40_ja1h7"]
+[ext_resource type="Resource" uid="uid://dnfgynykvuiq7" path="res://cards/data/hearts_8.tres" id="41_p4npv"]
+[ext_resource type="Resource" uid="uid://cj4pgmwmgwydt" path="res://cards/data/hearts_9.tres" id="42_xjcjm"]
+[ext_resource type="Resource" uid="uid://cf8ioabre3tne" path="res://cards/data/spades_10.tres" id="43_tc8uq"]
+[ext_resource type="Resource" uid="uid://dwv7fi6lm6h6t" path="res://cards/data/spades_11.tres" id="44_h5tdf"]
+[ext_resource type="Resource" uid="uid://dkitjtmcb58s6" path="res://cards/data/spades_12.tres" id="45_xbifu"]
+[ext_resource type="Resource" uid="uid://csx7ckyr58jds" path="res://cards/data/spades_13.tres" id="46_gdf8r"]
+[ext_resource type="Resource" uid="uid://b2t3aggkuhyff" path="res://cards/data/spades_14.tres" id="47_x8trd"]
+[ext_resource type="Resource" uid="uid://c06e14ynor74a" path="res://cards/data/spades_2.tres" id="48_s33c4"]
+[ext_resource type="Resource" uid="uid://b788ak8uem7bs" path="res://cards/data/spades_3.tres" id="49_3hv4c"]
+[ext_resource type="Resource" uid="uid://bxjotkhfrwueh" path="res://cards/data/spades_4.tres" id="50_vniw0"]
+[ext_resource type="Resource" uid="uid://bljmw8vbtdime" path="res://cards/data/spades_5.tres" id="51_lddog"]
+[ext_resource type="Resource" uid="uid://hga7mois36pt" path="res://cards/data/spades_6.tres" id="52_boxkr"]
+[ext_resource type="Resource" uid="uid://ivwmq2qfexvv" path="res://cards/data/spades_7.tres" id="53_de5we"]
+[ext_resource type="Resource" uid="uid://2fh7ssakwdsh" path="res://cards/data/spades_8.tres" id="54_8tghg"]
+[ext_resource type="Resource" uid="uid://b2ew5dvv54j6p" path="res://cards/data/spades_9.tres" id="55_473mq"]
+[ext_resource type="Script" uid="uid://dowgud10rp5yf" path="res://addons/simple_cards/card/card.gd" id="57_n8ral"]
 
-[sub_resource type="Gradient" id="Gradient_iywne"]
-offsets = PackedFloat32Array(1)
-colors = PackedColorArray(0, 0, 1, 1)
+[sub_resource type="Resource" id="Resource_kvpfn"]
+script = ExtResource("5_vtaks")
+card_list = Array[ExtResource("3_gee14")]([ExtResource("4_bk1p3"), ExtResource("5_n8ral"), ExtResource("6_yd4ix"), ExtResource("7_66xif"), ExtResource("8_bnuda"), ExtResource("9_0rmfi"), ExtResource("10_xbak0"), ExtResource("11_3x28f"), ExtResource("12_l6q63"), ExtResource("13_mmvbu"), ExtResource("14_weeiq"), ExtResource("15_uxocx"), ExtResource("16_7nv0b"), ExtResource("17_o8oq8"), ExtResource("18_sxt1d"), ExtResource("19_2iuns"), ExtResource("20_7gkqi"), ExtResource("21_753oq"), ExtResource("22_3x338"), ExtResource("23_1yg85"), ExtResource("24_s0g06"), ExtResource("25_2gnni"), ExtResource("26_vgxg3"), ExtResource("27_4nbsr"), ExtResource("28_fkywm"), ExtResource("29_dku7i"), ExtResource("30_veaf0"), ExtResource("31_flw08"), ExtResource("32_84hbc"), ExtResource("33_15b3c"), ExtResource("34_veukt"), ExtResource("35_nbjts"), ExtResource("36_i1hsc"), ExtResource("37_ounyb"), ExtResource("38_iekjf"), ExtResource("39_okmmv"), ExtResource("40_ja1h7"), ExtResource("41_p4npv"), ExtResource("42_xjcjm"), ExtResource("43_tc8uq"), ExtResource("44_h5tdf"), ExtResource("45_xbifu"), ExtResource("46_gdf8r"), ExtResource("47_x8trd"), ExtResource("48_s33c4"), ExtResource("49_3hv4c"), ExtResource("50_vniw0"), ExtResource("51_lddog"), ExtResource("52_boxkr"), ExtResource("53_de5we"), ExtResource("54_8tghg"), ExtResource("55_473mq")])
+metadata/_custom_type_script = "uid://lhb5ry3o8icy"
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_p57ef"]
-gradient = SubResource("Gradient_iywne")
+[sub_resource type="Resource" id="Resource_lbhrr"]
+script = ExtResource("3_lnu2h")
+num_of_cols = 4
+num_of_rows = 1
+col_offset = 70.0
+row_offset = 10.0
+arrange_by_rows = false
+metadata/_custom_type_script = "uid://qd3kangeiqg"
 
-[sub_resource type="Gradient" id="Gradient_u5sy4"]
-offsets = PackedFloat32Array(1)
-colors = PackedColorArray(1, 0, 0, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_gee14"]
-gradient = SubResource("Gradient_u5sy4")
-
-[sub_resource type="Gradient" id="Gradient_0tnpc"]
-offsets = PackedFloat32Array(1)
-colors = PackedColorArray(0, 1, 0, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_vtaks"]
-gradient = SubResource("Gradient_0tnpc")
-
-[node name="Game" type="Node2D" unique_id=1029340159]
+[node name="Game" type="Control" unique_id=1567249584]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_iywne")
 
-[node name="CardManager" type="Control" parent="." unique_id=1176049217]
-unique_name_in_owner = true
-layout_mode = 3
-anchors_preset = 0
-offset_left = -200.0
-offset_top = -200.0
-offset_right = 200.0
-offset_bottom = 200.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("1_lnu2h")
-card_size = Vector2(64, 64)
-card_factory_scene = ExtResource("2_iywne")
-metadata/_custom_type_script = "uid://clqgq1n7v0ar"
-
 [node name="Camera2D" type="Camera2D" parent="." unique_id=991896305]
-zoom = Vector2(0.5, 0.5)
+anchor_mode = 0
 
-[node name="GameUI" type="Control" parent="." unique_id=1981007651]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-metadata/_edit_use_anchors_ = true
+[node name="CardDeckManager" type="Node" parent="." unique_id=1122825445]
+unique_name_in_owner = true
+script = ExtResource("2_u5sy4")
+deck = SubResource("Resource_kvpfn")
+auto_setup = true
+metadata/_custom_type_script = "uid://bisyk4bowdvsf"
 
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="GameUI" unique_id=486485720]
+[node name="DeckButton" type="Button" parent="." unique_id=926326752]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -600.0
-offset_top = -200.0
-offset_right = 600.0
-offset_bottom = 200.0
+anchor_left = 0.35
+anchor_top = 0.4
+anchor_right = 0.4
+anchor_bottom = 0.6
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("57_n8ral")
+front_layout_name = &"scoundral_back_card_layout"
+back_layout_name = &"scoundral_back_card_layout"
+metadata/_custom_type_script = "uid://dowgud10rp5yf"
 
-[node name="Control" type="Control" parent="GameUI" unique_id=1277710344]
-layout_mode = 1
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -600.0
-offset_top = -200.0
-offset_right = 600.0
-offset_bottom = 200.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Deck" type="Control" parent="GameUI/Control" unique_id=945342470]
+[node name="Room" type="Control" parent="." unique_id=158004445]
 unique_name_in_owner = true
 layout_mode = 1
-anchor_right = 0.2
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-script = ExtResource("2_lbhrr")
-max_stack_display = 1
-card_face_up = false
-allow_card_movement = false
-restrict_to_top_card = false
-align_drop_zone_with_top_card = false
-enable_drop_zone = false
-metadata/_custom_type_script = "uid://6ams8uvg43gu"
-
-[node name="Panel" type="Panel" parent="GameUI/Control/Deck" unique_id=860665763]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="TextureRect" type="TextureRect" parent="GameUI/Control/Deck/Panel" unique_id=827777501]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("GradientTexture2D_p57ef")
-
-[node name="Room" type="Control" parent="GameUI/Control" unique_id=1026961605]
-unique_name_in_owner = true
-layout_mode = 1
-anchor_left = 0.2
-anchor_right = 0.8
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-script = ExtResource("3_iywne")
+anchor_left = 0.4
+anchor_top = 0.4
+anchor_right = 0.6
+anchor_bottom = 0.6
+script = ExtResource("2_yqjtg")
+shape = SubResource("Resource_lbhrr")
 max_hand_size = 4
-max_hand_spread = 256
-metadata/_custom_type_script = "uid://dj46jo3lfbclo"
-
-[node name="Panel2" type="Panel" parent="GameUI/Control/Room" unique_id=602137695]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="TextureRect" type="TextureRect" parent="GameUI/Control/Room/Panel2" unique_id=1117629964]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("GradientTexture1D_gee14")
-
-[node name="Discard" type="Control" parent="GameUI/Control" unique_id=1813335926]
-unique_name_in_owner = true
-layout_mode = 1
-anchor_left = 0.8
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 0
-grow_vertical = 2
-size_flags_horizontal = 3
-script = ExtResource("2_lbhrr")
-max_stack_display = 1
-layout = 1
-enable_drop_zone = false
-metadata/_custom_type_script = "uid://6ams8uvg43gu"
-
-[node name="Panel3" type="Panel" parent="GameUI/Control/Discard" unique_id=167074431]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="TextureRect" type="TextureRect" parent="GameUI/Control/Discard/Panel3" unique_id=466936186]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("GradientTexture1D_vtaks")
+metadata/_custom_type_script = "uid://bbi8i6vef3f6y"

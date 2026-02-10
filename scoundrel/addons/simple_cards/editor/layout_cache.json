@@ -1,0 +1,26 @@
+{
+	"res://addons/simple_cards/card/card_layout/default_card_back_layout.tscn": {
+		"enabled": true,
+		"last_modified": 0.0,
+		"layout_id": "default_back",
+		"tags": []
+	},
+	"res://addons/simple_cards/card/card_layout/default_card_layout.tscn": {
+		"enabled": true,
+		"last_modified": 0.0,
+		"layout_id": "default",
+		"tags": []
+	},
+	"res://cards/scoundral_back_card_layout.tscn": {
+		"enabled": true,
+		"last_modified": 1770683092,
+		"layout_id": "scoundral_back_card_layout",
+		"tags": []
+	},
+	"res://cards/scoundrel_card_layout.tscn": {
+		"enabled": true,
+		"last_modified": 1770682933,
+		"layout_id": "scoundrel_card_layout",
+		"tags": []
+	}
+}

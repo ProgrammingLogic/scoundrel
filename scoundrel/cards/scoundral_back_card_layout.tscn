@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://vecd7gfjqdrp"]
+
+[ext_resource type="Script" uid="uid://dm115oleoggyt" path="res://addons/simple_cards/card/card_layout/card_layout.gd" id="1_0a68r"]
+[ext_resource type="Texture2D" uid="uid://b4qekcrbgy2fy" path="res://cards/images/back.png" id="2_uc30a"]
+
+[node name="CardLayout" type="SubViewportContainer" unique_id=379225138]
+offset_right = 80.0
+offset_bottom = 112.0
+script = ExtResource("1_0a68r")
+metadata/is_layout = true
+metadata/layout_id = "scoundral_back_card_layout"
+metadata/tags = []
+metadata/_custom_type_script = "uid://dm115oleoggyt"
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=1236356306]
+handle_input_locally = false
+size = Vector2i(80, 112)
+render_target_update_mode = 4
+
+[node name="TextureRect" type="TextureRect" parent="SubViewport" unique_id=590554977]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_uc30a")

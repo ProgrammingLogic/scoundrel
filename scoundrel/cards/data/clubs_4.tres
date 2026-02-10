@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ScoundrelCardResource" format=3 uid="uid://becv7h2lelf3q"]
+
+[ext_resource type="Texture2D" uid="uid://bx5i0cnacw5px" path="res://cards/images/clubs_4.png" id="1_2x8aw"]
+[ext_resource type="Script" uid="uid://v2vcg0rvqgwi" path="res://cards/scoundrel_card.gd" id="1_4fpal"]
+
+[resource]
+script = ExtResource("1_4fpal")
+value = 4
+suite = "clubs"
+image = ExtResource("1_2x8aw")

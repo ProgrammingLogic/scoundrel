@@ -1,84 +1,81 @@
-extends Node2D
+extends Control
 
 
-@onready var card_manager = %CardManager
+@onready var cards: Array[Card]
+@onready var room: CardHand = %Room
+@onready var deck: CardHand = %Deck
 
-@onready var deck = %Deck
-@onready var room = %Room
-@onready var discard = %Discard
+@onready var card_deck_manager: CardDeckManager = %CardDeckManager
+
+signal game_won
+signal game_lost
 
 
 func _ready() -> void:
-	start_game()
+	CG.def_front_layout = LayoutID.DEFAULT_BACK
+	CG.def_back_layout = LayoutID.SCOUNDREL_CARD_LAYOUT
+
+	card_deck_manager.setup()
+	fill_room()
 
 
-func start_game() -> void:
-	create_deck()
-	#deck.shuffle()
-	#draw_room()
+## Fills the room with cards from the deck.
+func fill_room() -> void:
+	var to_draw: int = room.get_remaining_space()
+	assert(to_draw > 0)
+
+	var deck_size = card_deck_manager.get_pile_size(CardDeck.Pile.DRAW)
+
+	# We've won if all of the cards in the deck have been cycled through.
+	if to_draw > deck_size:
+		print("we won!")
+		game_won.emit(to_draw - deck_size)
+		return
+
+	room.add_cards(card_deck_manager.draw_cards(to_draw))
 
 
-## Create the deck that is to be used for the game.
-##
-## Input:
-## - None
-##
-## Output:
-## - None
-func create_deck() -> void:
-	var suites = ["clubs", "diamonds", "hearts", "spades"]
-	var values = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]
+func create_resource_cards(image_dir: String) -> void:
+	var dir := DirAccess.open(image_dir)
+	assert(dir != null)
 
-	for suite in suites:
-		for value in values:
-			var card_name = "%s_%s" % [suite, value]
+	dir.list_dir_begin()
+	for file: String in dir.get_files():
+		if "import" in file:
+			continue
+		if "back" in file:
+			continue
+		if "front" in file:
+			continue
+		if "empty" in file:
+			continue
 
-			# Remove diamond/heart A, J, Q, K from the deck
-			if suite in ["diamonds", "hearts"] and value in ["A", "J", "Q", "K"]:
-				var card = card_manager.card_factory.create_card(card_name, discard)
-				discard.add_card(card) # Testing
-				continue
+		var base_name := file.split(".")[0]
+		var suite = base_name.split("_")[0]
+		var value = base_name.split("_")[1]
+		var image = file
 
-			if value in ["2", "3", "4", "5"] and suite in ["spades"]:
-				var card = card_manager.card_factory.create_card(card_name, room)
-				room.add_card(card) # Testing
-				continue
-
-			var card = card_manager.card_factory.create_card(card_name, deck)
-			deck.add_card(card)
-
-	assert(deck.get_card_count() > 0)
-	for card in deck.get_top_cards(deck.get_card_count()):
-		assert(not(
-			card.card_info["suit"] in ["heart", "diamond"] and
-			card.card_info["value"] in ["A", "J", "Q", "K"]
-		))
-
-	assert(discard.get_card_count() > 0)
-	for card in discard.get_top_cards(discard.get_card_count()):
-		assert(
-			card.card_info["suit"] in ["heart", "diamond"] and
-			card.card_info["value"] in ["A", "J", "Q", "K"]
-		)
+		var resource = ScoundrelCardResource.new()
+		resource.image = load(image)
+		resource.suite = suite
+		resource.value = value as int
+		ResourceSaver.save(resource, "res://cards/data/%s.tres" % [base_name])
 
 
+func create_resource_deck(cards_dir: String, output_file: String) -> void:
+	var dir := DirAccess.open(cards_dir)
+	assert(dir != null)
 
-## Draw cards into the room.
-##
-## Input:
-## - None
-##
-## Output:
-## - None
-func draw_room() -> void:
-	var count_room_cards = room.get_card_count()
-	assert(count_room_cards < 4)
+	var resource: CardDeck
+	resource = CardDeck.new()
 
-	for i in 4:
-		var count_deck_cards = deck.get_card_count()
 
-		if count_deck_cards == 0:
-			break
+	dir.list_dir_begin()
+	for file: String in dir.get_files():
+		if "import" in file:
+			continue
 
-		var card = deck.get_top_cards(1).front()
-		room.move_cards([card])
+		var card_resource := load("res://cards/data/%s" % [file])
+		resource.add_card(card_resource)
+
+	ResourceSaver.save(resource, output_file)

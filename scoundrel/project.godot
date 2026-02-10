@@ -15,10 +15,18 @@ run/main_scene="uid://di40bos10u5gf"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+CG="*uid://di2oxtaq5vhmh"
+
 [editor]
 
 version_control/plugin_name="GitPlugin"
 version_control/autoload_on_startup=true
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/simple_cards/plugin.cfg")
 
 [physics]
 
