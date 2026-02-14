@@ -2,14 +2,14 @@
 
 [ext_resource type="Script" uid="uid://dhdcpgfakuls6" path="res://scenes/game.gd" id="1_iywne"]
 [ext_resource type="Script" uid="uid://bisyk4bowdvsf" path="res://addons/simple_cards/deck/manager/card_deck_manager.gd" id="2_u5sy4"]
-[ext_resource type="Script" uid="uid://bbi8i6vef3f6y" path="res://addons/simple_cards/hand/card_hand.gd" id="2_yqjtg"]
 [ext_resource type="Resource" uid="uid://bfprwa8xhdruq" path="res://cards/scoundrel_card_deck.tres" id="3_p57ef"]
+[ext_resource type="Script" uid="uid://dtoo5otl7rcn4" path="res://cards/card_room.gd" id="5_p57ef"]
 [ext_resource type="Script" uid="uid://dowgud10rp5yf" path="res://addons/simple_cards/card/card.gd" id="57_n8ral"]
 [ext_resource type="Script" uid="uid://ds3wmy54uk1jq" path="res://cards/room_hand_shape.gd" id="59_n8ral"]
 
-[sub_resource type="Resource" id="Resource_yd4ix"]
+[sub_resource type="Resource" id="Resource_u5sy4"]
 script = ExtResource("59_n8ral")
-horizontal_margin = 8
+horizontal_margin = 16
 metadata/_custom_type_script = "uid://ds3wmy54uk1jq"
 
 [node name="Game" type="Control" unique_id=1567249584]
@@ -53,12 +53,11 @@ front_layout_name = &"scoundrel_back_card_layout"
 back_layout_name = &"scoundrel_back_card_layout"
 metadata/_custom_type_script = "uid://dowgud10rp5yf"
 
-[node name="Room" type="Control" parent="HBoxContainer" unique_id=158004445]
+[node name="CardRoom" type="Control" parent="HBoxContainer" unique_id=54891538]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(256, 128)
+custom_minimum_size = Vector2(256, 0)
 layout_mode = 2
-size_flags_horizontal = 3
-script = ExtResource("2_yqjtg")
-shape = SubResource("Resource_yd4ix")
+script = ExtResource("5_p57ef")
+shape = SubResource("Resource_u5sy4")
 max_hand_size = 4
-metadata/_custom_type_script = "uid://bbi8i6vef3f6y"
+metadata/_custom_type_script = "uid://dtoo5otl7rcn4"

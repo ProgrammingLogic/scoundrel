@@ -5,6 +5,7 @@ class_name RoomHandShape extends CardHandShape
 
 const NUM_OF_COLUMNS = 4
 
+
 func arrange_cards(cards: Array[Card], hand: CardHand, skipped_cards: Array[Card] = []) -> Array[Vector2]:
 	var card_count = cards.size()
 	var card_positions: Array[Vector2] = []
@@ -13,29 +14,24 @@ func arrange_cards(cards: Array[Card], hand: CardHand, skipped_cards: Array[Card
 	if card_count == 0:
 		return []
 
-	var actual_columns = ceili(float(card_count) / float(NUM_OF_COLUMNS))
-	var grid_starting_position = Vector2(0, 0)
+	var column_count = ceili(float(card_count) / float(NUM_OF_COLUMNS))
 
-	var width = (actual_columns - 1)
+	var width = (column_count - 1)
 	var height = (cards[0].size.y)
 
 	for i: int in card_count:
 		var card := cards[i]
-		var grid_index = i / actual_columns
-		var offset_x = grid_index * (card_size_x + horizontal_margin)
+		var card_size = card.size
+		var grid_index = i / column_count
+		var grid_offset = grid_index * (card_size_x + horizontal_margin)
 
-		var card_position = Vector2(
-			grid_starting_position.x + offset_x,
-			grid_starting_position.y,
-		)
-
+		var card_position = Vector2(grid_offset, 0)
 		card_positions.append(card_position)
 
 		if not skipped_cards.is_empty() and skipped_cards.has(card):
 			continue
 
-		var card_global_position = hand.global_position + card_position
-		card.tween_position(card_global_position, 0.2, true)
+		card.tween_position(card_position, 0.2)
 		card.rotation = card.rotation_offset
 
 	return card_positions

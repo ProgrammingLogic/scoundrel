@@ -47,14 +47,13 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_sefbb")
 
 [node name="CardValue" type="Label" parent="SubViewport" unique_id=1964292995]
 unique_name_in_owner = true
-anchors_preset = -1
 offset_left = 3.0
 offset_top = -1.0
 text = "10"
 
 [node name="CardSuite" type="Label" parent="SubViewport" unique_id=948733633]
 unique_name_in_owner = true
-anchors_preset = -1
+anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0

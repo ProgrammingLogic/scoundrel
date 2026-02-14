@@ -2,7 +2,7 @@ extends Control
 
 
 @onready var cards: Array[Card]
-@onready var room: CardHand = %Room
+@onready var room: CardHand = %CardRoom
 @onready var card_deck_manager: CardDeckManager = %CardDeckManager
 
 

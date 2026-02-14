@@ -4,6 +4,7 @@ extends CardLayout
 @onready var card_value: Label = %CardValue
 @onready var card_suite: Label = %CardSuite
 
+
 func _update_display() -> void:
 	var data = card_resource as ScoundrelCardResource
 	assert(data)
