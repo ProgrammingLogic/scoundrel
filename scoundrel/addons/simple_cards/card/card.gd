@@ -99,7 +99,7 @@ func _ready() -> void:
 	focus_exited.connect(_on_focus_exited)
 	mouse_entered.connect(_on_mouse_entered)
 	mouse_exited.connect(_on_mouse_exited)
-	
+
 
 	if card_data and CG.get_available_layouts().has(card_data.custom_layout_name):
 			front_layout_name = card_data.custom_layout_name
@@ -124,11 +124,11 @@ func _process(delta: float) -> void:
 
 func _drag(delta: float) -> void:
 	if !holding: return
-	
+
 
 	global_position = lerp(
 		global_position,
-		CG.get_cursor_position() - _dragging_offset, 
+		CG.get_cursor_position() - _dragging_offset,
 		1 - exp(delta * drag_coef))
 	_set_movement_rotation(delta)
 
@@ -142,23 +142,23 @@ func _on_button_down() -> void:
 func _on_button_up() -> void:
 	_released = true
 	if holding:
-		holding = false 
+		holding = false
 		set_process(false)
 		CG.current_held_item = null
 		drag_ended.emit(self)
-		
+
 
 		if !_is_owened():
 			tween_rotation()
 			tween_scale()
-		
+
 		_on_mouse_exited()
 		_on_focus_exited()
 		if is_hovered():
 			_on_mouse_entered()
 		if has_focus():
 			_on_focus_entered()
-		
+
 	else:
 		card_clicked.emit(self)
 
@@ -166,7 +166,7 @@ func _check_for_hold() -> bool:
 	if !_released and !holding:
 		var current_cursor_pos = CG.get_cursor_position()
 		var drag_distance = _cursor_down_pos.distance_to(current_cursor_pos)
-		
+
 
 		if drag_distance > drag_threshold and !undraggable:
 			rotation = 0
@@ -241,14 +241,14 @@ func _set_movement_rotation(delta: float) -> void:
 		(global_position- _last_pos).x,
 		-max_card_rotation_deg,
 		max_card_rotation_deg)
-		
+
 
 	rotation_degrees = lerp(
 		rotation_degrees,
 		 desired_rotation,
 		 1 - exp(drag_coef *delta))
-	
-	_last_pos = global_position 
+
+	_last_pos = global_position
 
 ##Does what it says :[rb]
 func kill_all_tweens() -> void:
@@ -278,21 +278,21 @@ func _setup_layout(no_animations: bool = false) -> void:
 		_layout = CG.create_layout(front_layout_name)
 	else:
 		_layout = CG.create_layout(back_layout_name)
-	
+
 	if not _layout:
 		push_error("Card: Failed to create layout")
 		return
-	
+
 	add_child(_layout)
 	_layout.setup(self, card_data)
 	if !no_animations:
 		await _layout._flip_in()
-	
+
 	_layout.anchors_preset = Control.PRESET_FULL_RECT
-	_layout.mouse_filter = Control.MOUSE_FILTER_IGNORE 
+	_layout.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_layout.focus_behavior_recursive = Control.FOCUS_BEHAVIOR_DISABLED
 	_layout.mouse_behavior_recursive = Control.MOUSE_BEHAVIOR_DISABLED
-	
+
 	layout_changed.emit(layout_name)
 
 
@@ -306,7 +306,7 @@ func set_layout(new_layout_name: String, is_front: bool = true) -> void:
 
 func get_layout() -> CardLayout:
 	return _layout
-	
+
 ##Refreshes layout
 func refresh_layout() -> void:
 	if _layout:

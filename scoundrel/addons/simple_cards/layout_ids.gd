@@ -3,19 +3,19 @@
 
 class_name LayoutID
 
+const CARD_BACK: StringName = &"card_back"
+const CARD_FRONT: StringName = &"card_front"
 const DEFAULT: StringName = &"default"
 const DEFAULT_BACK: StringName = &"default_back"
-const SCOUNDREL_BACK_CARD_LAYOUT: StringName = &"scoundrel_back_card_layout"
-const SCOUNDREL_CARD_LAYOUT: StringName = &"scoundrel_card_layout"
 
 
 ## Returns all available layout IDs
 static func get_all() -> Array[StringName]:
 	return [
+		CARD_BACK,
+		CARD_FRONT,
 		DEFAULT,
-		DEFAULT_BACK,
-		SCOUNDREL_BACK_CARD_LAYOUT,
-		SCOUNDREL_CARD_LAYOUT
+		DEFAULT_BACK
 	]
 
 

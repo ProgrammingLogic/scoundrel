@@ -1,8 +1,0 @@
-[gd_resource type="Resource" script_class="CardDeck" format=3 uid="uid://bfprwa8xhdruq"]
-
-[ext_resource type="Script" uid="uid://c8315v58tr66b" path="res://addons/simple_cards/card/card_resource/card_resource.gd" id="1_t3xnp"]
-[ext_resource type="Script" uid="uid://lhb5ry3o8icy" path="res://addons/simple_cards/deck/card_deck.gd" id="2_w6n35"]
-
-[resource]
-script = ExtResource("2_w6n35")
-metadata/_custom_type_script = "uid://lhb5ry3o8icy"

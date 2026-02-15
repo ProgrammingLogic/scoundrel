@@ -18,7 +18,7 @@ offset_right = 80.0
 offset_bottom = 112.0
 script = ExtResource("1_0a68r")
 metadata/is_layout = true
-metadata/layout_id = "scoundrel_back_card_layout"
+metadata/layout_id = "card_back"
 metadata/tags = []
 metadata/_custom_type_script = "uid://dm115oleoggyt"
 

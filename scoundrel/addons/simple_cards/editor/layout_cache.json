@@ -11,16 +11,16 @@
 		"layout_id": "default",
 		"tags": []
 	},
-	"res://cards/scoundrel_back_card_layout.tscn": {
+	"res://cards/card_back.tscn": {
 		"enabled": true,
-		"last_modified": 1770743984,
-		"layout_id": "scoundrel_back_card_layout",
+		"last_modified": 1771081812,
+		"layout_id": "card_back",
 		"tags": []
 	},
-	"res://cards/scoundrel_card_layout.tscn": {
+	"res://cards/card_front.tscn": {
 		"enabled": true,
-		"last_modified": 1770742616,
-		"layout_id": "scoundrel_card_layout",
+		"last_modified": 1771081937,
+		"layout_id": "card_front",
 		"tags": []
 	}
 }
