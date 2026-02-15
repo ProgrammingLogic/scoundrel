@@ -19,7 +19,7 @@
 	},
 	"res://cards/card_front.tscn": {
 		"enabled": true,
-		"last_modified": 1771172188,
+		"last_modified": 1771175910,
 		"layout_id": "card_front",
 		"tags": []
 	}
