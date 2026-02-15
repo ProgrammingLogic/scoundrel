@@ -7,8 +7,8 @@
 [ext_resource type="Script" uid="uid://lhb5ry3o8icy" path="res://addons/simple_cards/deck/card_deck.gd" id="4_u5sy4"]
 [ext_resource type="Script" uid="uid://dowgud10rp5yf" path="res://addons/simple_cards/card/card.gd" id="6_gee14"]
 [ext_resource type="Script" uid="uid://qd3kangeiqg" path="res://addons/simple_cards/hand/shape/premade_shapes/grid_shape.gd" id="6_p57ef"]
-[ext_resource type="Script" uid="uid://v2vcg0rvqgwi" path="res://cards/card_resource.gd" id="7_0tnpc"]
-[ext_resource type="Theme" uid="uid://cuh2scwrf3ncj" path="res://themes/play_area.tres" id="7_u5sy4"]
+[ext_resource type="Script" uid="uid://v2vcg0rvqgwi" path="res://resources/card_resource.gd" id="7_0tnpc"]
+[ext_resource type="Theme" uid="uid://cuh2scwrf3ncj" path="res://ui_themes/play_area.tres" id="7_u5sy4"]
 
 [sub_resource type="Resource" id="Resource_gee14"]
 script = ExtResource("4_u5sy4")
