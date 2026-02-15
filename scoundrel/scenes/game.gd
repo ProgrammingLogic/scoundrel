@@ -3,6 +3,7 @@ extends Control
 
 @onready var cards: Array[Card]
 @onready var room_hand: CardHand = %CardRoom
+@onready var deck_button: Card = %DeckButton
 @onready var card_deck_manager: CardDeckManager = %CardDeckManager
 
 
@@ -18,6 +19,7 @@ func _ready() -> void:
 	CG.def_front_layout = LayoutID.CARD_FRONT
 	CG.def_back_layout = LayoutID.CARD_BACK
 
+	deck_button.flip()
 	fill_deck(card_deck_manager.deck)
 	card_deck_manager.setup()
 	fill_room()

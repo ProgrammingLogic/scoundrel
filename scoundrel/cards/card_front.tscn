@@ -14,17 +14,8 @@ shadow_color = Color(0, 0, 0, 1)
 shadow_size = 4
 
 [node name="CardLayout" type="SubViewportContainer" unique_id=750627426]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -40.0
-offset_top = -56.0
-offset_right = 40.0
-offset_bottom = 56.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_right = 80.0
+offset_bottom = 112.0
 script = ExtResource("1_i3j66")
 metadata/is_layout = true
 metadata/layout_id = "card_front"

@@ -116,6 +116,7 @@ func set_card_size():
 	self_modulate.a = 0
 	center_pos = Vector2(size.x/2 , size.y/2)
 	pivot_offset = center_pos
+	custom_minimum_size = size
 
 func _process(delta: float) -> void:
 	_drag(delta)

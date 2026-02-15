@@ -1,20 +1,35 @@
 [gd_scene format=3 uid="uid://di40bos10u5gf"]
 
 [ext_resource type="Script" uid="uid://dhdcpgfakuls6" path="res://scenes/game.gd" id="1_iywne"]
-[ext_resource type="Script" uid="uid://bisyk4bowdvsf" path="res://addons/simple_cards/simple_cards/deck/manager/card_deck_manager.gd" id="2_u5sy4"]
-[ext_resource type="Script" uid="uid://bbi8i6vef3f6y" path="res://addons/simple_cards/simple_cards/hand/card_hand.gd" id="2_yqjtg"]
-[ext_resource type="Script" uid="uid://c8315v58tr66b" path="res://addons/simple_cards/simple_cards/card/card_resource/card_resource.gd" id="3_p57ef"]
-[ext_resource type="Script" uid="uid://lhb5ry3o8icy" path="res://addons/simple_cards/simple_cards/deck/card_deck.gd" id="4_u5sy4"]
-[ext_resource type="Script" uid="uid://qd3kangeiqg" path="res://addons/simple_cards/simple_cards/hand/shape/premade_shapes/grid_shape.gd" id="6_p57ef"]
+[ext_resource type="Script" uid="uid://bisyk4bowdvsf" path="res://addons/simple_cards/deck/manager/card_deck_manager.gd" id="2_u5sy4"]
+[ext_resource type="Script" uid="uid://bbi8i6vef3f6y" path="res://addons/simple_cards/hand/card_hand.gd" id="2_yqjtg"]
+[ext_resource type="Script" uid="uid://c8315v58tr66b" path="res://addons/simple_cards/card/card_resource/card_resource.gd" id="3_p57ef"]
+[ext_resource type="Script" uid="uid://lhb5ry3o8icy" path="res://addons/simple_cards/deck/card_deck.gd" id="4_u5sy4"]
+[ext_resource type="Script" uid="uid://dowgud10rp5yf" path="res://addons/simple_cards/card/card.gd" id="6_gee14"]
+[ext_resource type="Script" uid="uid://qd3kangeiqg" path="res://addons/simple_cards/hand/shape/premade_shapes/grid_shape.gd" id="6_p57ef"]
+[ext_resource type="Script" uid="uid://v2vcg0rvqgwi" path="res://cards/card_resource.gd" id="7_0tnpc"]
+[ext_resource type="Theme" uid="uid://cuh2scwrf3ncj" path="res://themes/play_area.tres" id="7_u5sy4"]
 
 [sub_resource type="Resource" id="Resource_gee14"]
 script = ExtResource("4_u5sy4")
 draw_pile_low_threshold = 4
 metadata/_custom_type_script = "uid://lhb5ry3o8icy"
 
+[sub_resource type="Resource" id="Resource_kvpfn"]
+script = ExtResource("7_0tnpc")
+value = 1
+suite = "hearts"
+metadata/_custom_type_script = "uid://v2vcg0rvqgwi"
+
 [sub_resource type="Resource" id="Resource_u5sy4"]
 script = ExtResource("6_p57ef")
 num_of_cols = 4
+num_of_rows = 1
+metadata/_custom_type_script = "uid://qd3kangeiqg"
+
+[sub_resource type="Resource" id="Resource_vtaks"]
+script = ExtResource("6_p57ef")
+num_of_cols = 1
 num_of_rows = 1
 metadata/_custom_type_script = "uid://qd3kangeiqg"
 
@@ -27,6 +42,15 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_iywne")
 
+[node name="Panel" type="Panel" parent="." unique_id=1427586988]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("7_u5sy4")
+
 [node name="Camera2D" type="Camera2D" parent="." unique_id=991896305]
 anchor_mode = 0
 
@@ -36,28 +60,82 @@ script = ExtResource("2_u5sy4")
 deck = SubResource("Resource_gee14")
 auto_setup = true
 pile_nodes = {
-0: null
+1: NodePath("../Control/CenterContainer/MarginContainer/MarginContainer/HBoxContainer/MarginContainer3/DiscardContainer")
 }
+front_face_in_pile = Dictionary[int, bool]({
+1: true
+})
 metadata/_custom_type_script = "uid://bisyk4bowdvsf"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=290634134]
+[node name="Control" type="Control" parent="." unique_id=26870908]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CardRoom" type="Control" parent="HBoxContainer" unique_id=1759388378]
+[node name="CenterContainer" type="CenterContainer" parent="Control" unique_id=1743951898]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/CenterContainer" unique_id=219524790]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="Control/CenterContainer/MarginContainer" unique_id=434020500]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme = ExtResource("7_u5sy4")
+theme_type_variation = &"Panel2"
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/CenterContainer/MarginContainer" unique_id=398246227]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/CenterContainer/MarginContainer/MarginContainer" unique_id=290634134]
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="Control/CenterContainer/MarginContainer/MarginContainer/HBoxContainer" unique_id=816281378]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 20
+
+[node name="DeckButton" type="Button" parent="Control/CenterContainer/MarginContainer/MarginContainer/HBoxContainer/MarginContainer2" unique_id=2122759206]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("6_gee14")
+card_data = SubResource("Resource_kvpfn")
+front_layout_name = &"card_front"
+back_layout_name = &"card_back"
+metadata/_custom_type_script = "uid://dowgud10rp5yf"
+
+[node name="MarginContainer4" type="MarginContainer" parent="Control/CenterContainer/MarginContainer/MarginContainer/HBoxContainer" unique_id=2010120526]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 20
+
+[node name="CardRoom" type="Control" parent="Control/CenterContainer/MarginContainer/MarginContainer/HBoxContainer/MarginContainer4" unique_id=1759388378]
 unique_name_in_owner = true
 layout_mode = 2
 script = ExtResource("2_yqjtg")
 shape = SubResource("Resource_u5sy4")
 max_hand_size = 4
+metadata/_custom_type_script = "uid://bbi8i6vef3f6y"
+
+[node name="MarginContainer3" type="MarginContainer" parent="Control/CenterContainer/MarginContainer/MarginContainer/HBoxContainer" unique_id=1888576997]
+layout_mode = 2
+
+[node name="DiscardContainer" type="Control" parent="Control/CenterContainer/MarginContainer/MarginContainer/HBoxContainer/MarginContainer3" unique_id=898971582]
+layout_mode = 2
+script = ExtResource("2_yqjtg")
+shape = SubResource("Resource_vtaks")
 metadata/_custom_type_script = "uid://bbi8i6vef3f6y"
