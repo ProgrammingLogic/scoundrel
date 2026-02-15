@@ -1,5 +1,5 @@
 # scoundrel
 
 ## Credits 
-- [chun92/card-framework](https://github.com/chun92/card-framework) -> Used as a framework for the cards
-- [Playing Cards Pack by Kenney](http://www.kenney.nl/)
+- [simple-card-v-2 by twdoor](github.com/twdoor/simple-cards-v-2/tree/main)
+- [Monster Asset Pack by Deep Dive Game Studio](https://deepdivegamestudio.itch.io/monsterassetpack)
