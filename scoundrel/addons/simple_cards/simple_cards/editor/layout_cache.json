@@ -11,16 +11,20 @@
 		"layout_id": "default",
 		"tags": []
 	},
-	"res://cards/card_back.tscn": {
+	"res://examples/cards/standard_deck/standard_back_layout.tscn": {
 		"enabled": true,
-		"last_modified": 1771081812,
-		"layout_id": "card_back",
-		"tags": []
+		"last_modified": 1769865119,
+		"layout_id": "standard_back_layout",
+		"tags": [
+			"back"
+		]
 	},
-	"res://cards/card_front.tscn": {
+	"res://examples/cards/standard_deck/standard_layout.tscn": {
 		"enabled": true,
-		"last_modified": 1771171471,
-		"layout_id": "card_front",
-		"tags": []
+		"last_modified": 1770833988,
+		"layout_id": "standard_layout",
+		"tags": [
+			"front"
+		]
 	}
 }

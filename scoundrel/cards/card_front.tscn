@@ -27,7 +27,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_i3j66")
 metadata/is_layout = true
-metadata/layout_id = "scoundrel_card_layout"
+metadata/layout_id = "card_front"
 metadata/tags = []
 metadata/_custom_type_script = "uid://dm115oleoggyt"
 
