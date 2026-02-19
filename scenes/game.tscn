@@ -8,7 +8,8 @@
 [ext_resource type="Script" uid="uid://dowgud10rp5yf" path="res://addons/simple_cards/card/card.gd" id="6_gee14"]
 [ext_resource type="Script" uid="uid://qd3kangeiqg" path="res://addons/simple_cards/hand/shape/premade_shapes/grid_shape.gd" id="6_p57ef"]
 [ext_resource type="Script" uid="uid://v2vcg0rvqgwi" path="res://resources/card_resource.gd" id="7_0tnpc"]
-[ext_resource type="Theme" uid="uid://cuh2scwrf3ncj" path="res://ui_themes/play_area.tres" id="7_u5sy4"]
+[ext_resource type="Theme" uid="uid://cuh2scwrf3ncj" path="res://ui_themes/game_theme.tres" id="7_u5sy4"]
+[ext_resource type="Script" uid="uid://cowlfda7t70v3" path="res://scenes/card_hand.gd" id="8_vtaks"]
 
 [sub_resource type="Resource" id="Resource_gee14"]
 script = ExtResource("4_u5sy4")
@@ -21,7 +22,7 @@ value = 1
 suite = "hearts"
 metadata/_custom_type_script = "uid://v2vcg0rvqgwi"
 
-[sub_resource type="Resource" id="Resource_u5sy4"]
+[sub_resource type="Resource" id="Resource_0tnpc"]
 script = ExtResource("6_p57ef")
 num_of_cols = 4
 num_of_rows = 1
@@ -55,7 +56,6 @@ theme = ExtResource("7_u5sy4")
 anchor_mode = 0
 
 [node name="CardDeckManager" type="Node" parent="." unique_id=1122825445 node_paths=PackedStringArray("pile_nodes")]
-unique_name_in_owner = true
 script = ExtResource("2_u5sy4")
 deck = SubResource("Resource_gee14")
 auto_setup = true
@@ -123,11 +123,11 @@ layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_right = 20
 
-[node name="CardRoom" type="Control" parent="Control/CenterContainer/MarginContainer/MarginContainer/HBoxContainer/MarginContainer4" unique_id=1759388378]
+[node name="CardRoom" type="Control" parent="Control/CenterContainer/MarginContainer/MarginContainer/HBoxContainer/MarginContainer4" unique_id=1458227728]
 unique_name_in_owner = true
 layout_mode = 2
-script = ExtResource("2_yqjtg")
-shape = SubResource("Resource_u5sy4")
+script = ExtResource("8_vtaks")
+shape = SubResource("Resource_0tnpc")
 max_hand_size = 4
 metadata/_custom_type_script = "uid://bbi8i6vef3f6y"
 

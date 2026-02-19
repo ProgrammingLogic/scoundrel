@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 CG="*uid://di2oxtaq5vhmh"
+Globals="*uid://pn7ctwfns3k7"
 
 [editor]
 

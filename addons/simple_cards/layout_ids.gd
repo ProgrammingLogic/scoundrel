@@ -7,6 +7,7 @@ const CARD_BACK: StringName = &"card_back"
 const CARD_FRONT: StringName = &"card_front"
 const DEFAULT: StringName = &"default"
 const DEFAULT_BACK: StringName = &"default_back"
+const SELECTED_CARD: StringName = &"selected_card"
 
 
 ## Returns all available layout IDs
@@ -15,7 +16,8 @@ static func get_all() -> Array[StringName]:
 		CARD_BACK,
 		CARD_FRONT,
 		DEFAULT,
-		DEFAULT_BACK
+		DEFAULT_BACK,
+		SELECTED_CARD
 	]
 
 

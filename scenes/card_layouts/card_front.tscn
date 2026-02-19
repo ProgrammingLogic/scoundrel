@@ -1,17 +1,7 @@
 [gd_scene format=3 uid="uid://jmkosolrfcd8"]
 
-[ext_resource type="Script" uid="uid://cubhjjnwvxhjc" path="res://cards/card_front.gd" id="1_i3j66"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sefbb"]
-bg_color = Color(0.9019608, 0.9019608, 0.9019608, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0, 0, 0, 1)
-corner_detail = 20
-shadow_color = Color(0, 0, 0, 1)
-shadow_size = 4
+[ext_resource type="Script" uid="uid://cubhjjnwvxhjc" path="res://scenes/card_layouts/card_front.gd" id="1_i3j66"]
+[ext_resource type="Theme" uid="uid://cuh2scwrf3ncj" path="res://ui_themes/game_theme.tres" id="2_h5ggx"]
 
 [node name="CardLayout" type="SubViewportContainer" unique_id=750627426]
 offset_right = 80.0
@@ -34,7 +24,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_sefbb")
+theme = ExtResource("2_h5ggx")
+theme_type_variation = &"CardBackground"
 
 [node name="CardValue" type="Label" parent="SubViewport" unique_id=1964292995]
 unique_name_in_owner = true
