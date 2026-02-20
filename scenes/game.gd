@@ -134,6 +134,7 @@ func restart_game() -> void:
 
 ## Populate the room with cards.
 func fill_room() -> void:
+	reset_button_view()
 	cards_played = 0
 	health_potion_used = false
 
@@ -188,6 +189,14 @@ func create_deck() -> CardDeck:
 			_deck.cards.append(card_data)
 
 	return _deck
+
+
+func reset_button_view() -> void:
+	avoid_room_button.show()
+	equip_button.hide()
+	potion_button.hide()
+	fight_fists_button.hide()
+	fight_weapon_button.hide()
 
 
 func _input(event: InputEvent) -> void:
