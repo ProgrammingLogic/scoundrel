@@ -19,13 +19,13 @@
 	},
 	"res://scenes/card_layouts/card_front.tscn": {
 		"enabled": true,
-		"last_modified": 1771184452,
+		"last_modified": 1771546824,
 		"layout_id": "card_front",
 		"tags": []
 	},
 	"res://scenes/card_layouts/selected_card.tscn": {
 		"enabled": true,
-		"last_modified": 1771184700,
+		"last_modified": 1771545600,
 		"layout_id": "selected_card",
 		"tags": []
 	}

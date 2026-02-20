@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5yeseh7avtmy"
-path="res://.godot/imported/icon_card_hand.png-d5ce7599acaabd603e9a2828380e2223.ctex"
+uid="uid://css2yf6avgkk2"
+path="res://.godot/imported/Arrow.svg-6f1e55bb7a126385b36624f0fb45c162.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/simple_cards/hand/icon_card_hand.png"
-dest_files=["res://.godot/imported/icon_card_hand.png-d5ce7599acaabd603e9a2828380e2223.ctex"]
+source_file="res://resources/Arrow.svg"
+dest_files=["res://.godot/imported/Arrow.svg-6f1e55bb7a126385b36624f0fb45c162.ctex"]
 
 [params]
 
@@ -38,3 +38,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

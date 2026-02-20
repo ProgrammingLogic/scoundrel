@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5yeseh7avtmy"
-path="res://.godot/imported/icon_card_hand.png-d5ce7599acaabd603e9a2828380e2223.ctex"
+uid="uid://1g0jb8x0i516"
+path="res://.godot/imported/icon_card_pile.png-cc265ed237c83eeebfb9dce533c05f26.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/simple_cards/hand/icon_card_hand.png"
-dest_files=["res://.godot/imported/icon_card_hand.png-d5ce7599acaabd603e9a2828380e2223.ctex"]
+source_file="res://addons/simple_cards/pile/icon_card_pile.png"
+dest_files=["res://.godot/imported/icon_card_pile.png-cc265ed237c83eeebfb9dce533c05f26.ctex"]
 
 [params]
 

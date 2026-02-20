@@ -1,26 +1,22 @@
 [gd_scene format=3 uid="uid://di40bos10u5gf"]
 
 [ext_resource type="Script" uid="uid://dhdcpgfakuls6" path="res://scenes/game.gd" id="1_iywne"]
+[ext_resource type="Theme" uid="uid://c8dfshyx0rl25" path="res://resources/game_theme.tres" id="2_0tnpc"]
 [ext_resource type="Script" uid="uid://bisyk4bowdvsf" path="res://addons/simple_cards/deck/manager/card_deck_manager.gd" id="2_u5sy4"]
-[ext_resource type="Script" uid="uid://bbi8i6vef3f6y" path="res://addons/simple_cards/hand/card_hand.gd" id="2_yqjtg"]
 [ext_resource type="Script" uid="uid://c8315v58tr66b" path="res://addons/simple_cards/card/card_resource/card_resource.gd" id="3_p57ef"]
+[ext_resource type="Script" uid="uid://d2l8uaoel5whd" path="res://addons/simple_cards/pile/card_pile.gd" id="4_iywne"]
 [ext_resource type="Script" uid="uid://lhb5ry3o8icy" path="res://addons/simple_cards/deck/card_deck.gd" id="4_u5sy4"]
-[ext_resource type="Script" uid="uid://dowgud10rp5yf" path="res://addons/simple_cards/card/card.gd" id="6_gee14"]
+[ext_resource type="Script" uid="uid://cle02hultetj5" path="res://addons/simple_cards/hand/shape/premade_shapes/stack_shape.gd" id="5_p57ef"]
 [ext_resource type="Script" uid="uid://qd3kangeiqg" path="res://addons/simple_cards/hand/shape/premade_shapes/grid_shape.gd" id="6_p57ef"]
-[ext_resource type="Script" uid="uid://v2vcg0rvqgwi" path="res://resources/card_resource.gd" id="7_0tnpc"]
-[ext_resource type="Theme" uid="uid://cuh2scwrf3ncj" path="res://ui_themes/game_theme.tres" id="7_u5sy4"]
-[ext_resource type="Script" uid="uid://cowlfda7t70v3" path="res://scenes/card_hand.gd" id="8_vtaks"]
+[ext_resource type="Script" uid="uid://dmfx5vyih4nu2" path="res://scenes/room.gd" id="8_0tnpc"]
 
 [sub_resource type="Resource" id="Resource_gee14"]
 script = ExtResource("4_u5sy4")
-draw_pile_low_threshold = 4
 metadata/_custom_type_script = "uid://lhb5ry3o8icy"
 
-[sub_resource type="Resource" id="Resource_kvpfn"]
-script = ExtResource("7_0tnpc")
-value = 1
-suite = "hearts"
-metadata/_custom_type_script = "uid://v2vcg0rvqgwi"
+[sub_resource type="Resource" id="Resource_u5sy4"]
+script = ExtResource("5_p57ef")
+metadata/_custom_type_script = "uid://cle02hultetj5"
 
 [sub_resource type="Resource" id="Resource_0tnpc"]
 script = ExtResource("6_p57ef")
@@ -29,10 +25,8 @@ num_of_rows = 1
 metadata/_custom_type_script = "uid://qd3kangeiqg"
 
 [sub_resource type="Resource" id="Resource_vtaks"]
-script = ExtResource("6_p57ef")
-num_of_cols = 1
-num_of_rows = 1
-metadata/_custom_type_script = "uid://qd3kangeiqg"
+script = ExtResource("5_p57ef")
+metadata/_custom_type_script = "uid://cle02hultetj5"
 
 [node name="Game" type="Control" unique_id=1567249584]
 layout_mode = 3
@@ -50,34 +44,20 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("7_u5sy4")
+theme = ExtResource("2_0tnpc")
+theme_type_variation = &"GameBackground"
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=991896305]
 anchor_mode = 0
 
-[node name="CardDeckManager" type="Node" parent="." unique_id=1122825445 node_paths=PackedStringArray("pile_nodes")]
+[node name="CardDeckManager" type="Node" parent="." unique_id=177216011 node_paths=PackedStringArray("starting_pile")]
 script = ExtResource("2_u5sy4")
 deck = SubResource("Resource_gee14")
-auto_setup = true
-pile_nodes = {
-1: NodePath("../Control/CenterContainer/MarginContainer/MarginContainer/HBoxContainer/MarginContainer3/DiscardContainer")
-}
-front_face_in_pile = Dictionary[int, bool]({
-1: true
-})
+starting_pile = NodePath("../CardArea/HBoxContainer/MarginContainer/Deck")
 metadata/_custom_type_script = "uid://bisyk4bowdvsf"
 
-[node name="Control" type="Control" parent="." unique_id=26870908]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="CenterContainer" type="CenterContainer" parent="Control" unique_id=1743951898]
+[node name="CardArea" type="CenterContainer" parent="." unique_id=977711705]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -85,57 +65,228 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Control/CenterContainer" unique_id=219524790]
+[node name="HBoxContainer" type="HBoxContainer" parent="CardArea" unique_id=1308146457]
 layout_mode = 2
 
-[node name="Panel" type="Panel" parent="Control/CenterContainer/MarginContainer" unique_id=434020500]
-custom_minimum_size = Vector2(100, 0)
+[node name="MarginContainer" type="MarginContainer" parent="CardArea/HBoxContainer" unique_id=1888588978]
 layout_mode = 2
-theme = ExtResource("7_u5sy4")
-theme_type_variation = &"Panel2"
-
-[node name="MarginContainer" type="MarginContainer" parent="Control/CenterContainer/MarginContainer" unique_id=398246227]
-layout_mode = 2
-theme_override_constants/margin_left = 50
-theme_override_constants/margin_top = 20
+size_flags_vertical = 4
 theme_override_constants/margin_right = 50
-theme_override_constants/margin_bottom = 20
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/CenterContainer/MarginContainer/MarginContainer" unique_id=290634134]
-layout_mode = 2
-
-[node name="MarginContainer2" type="MarginContainer" parent="Control/CenterContainer/MarginContainer/MarginContainer/HBoxContainer" unique_id=816281378]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_right = 20
-
-[node name="DeckButton" type="Button" parent="Control/CenterContainer/MarginContainer/MarginContainer/HBoxContainer/MarginContainer2" unique_id=2122759206]
+[node name="Deck" type="Control" parent="CardArea/HBoxContainer/MarginContainer" unique_id=467180820]
 unique_name_in_owner = true
 layout_mode = 2
-script = ExtResource("6_gee14")
-card_data = SubResource("Resource_kvpfn")
-front_layout_name = &"card_front"
-back_layout_name = &"card_back"
-metadata/_custom_type_script = "uid://dowgud10rp5yf"
+size_flags_vertical = 4
+script = ExtResource("4_iywne")
+shape = SubResource("Resource_u5sy4")
+show_cards = true
+metadata/_custom_type_script = "uid://d2l8uaoel5whd"
 
-[node name="MarginContainer4" type="MarginContainer" parent="Control/CenterContainer/MarginContainer/MarginContainer/HBoxContainer" unique_id=2010120526]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_right = 20
-
-[node name="CardRoom" type="Control" parent="Control/CenterContainer/MarginContainer/MarginContainer/HBoxContainer/MarginContainer4" unique_id=1458227728]
+[node name="Room" type="Control" parent="CardArea/HBoxContainer" unique_id=113512927]
 unique_name_in_owner = true
 layout_mode = 2
-script = ExtResource("8_vtaks")
+script = ExtResource("8_0tnpc")
 shape = SubResource("Resource_0tnpc")
+enable_reordering = false
 max_hand_size = 4
 metadata/_custom_type_script = "uid://bbi8i6vef3f6y"
 
-[node name="MarginContainer3" type="MarginContainer" parent="Control/CenterContainer/MarginContainer/MarginContainer/HBoxContainer" unique_id=1888576997]
+[node name="MarginContainer2" type="MarginContainer" parent="CardArea/HBoxContainer" unique_id=1293776737]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+
+[node name="Discard" type="Control" parent="CardArea/HBoxContainer/MarginContainer2" unique_id=343424051]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("4_iywne")
+shape = SubResource("Resource_vtaks")
+show_cards = true
+face_up = true
+metadata/_custom_type_script = "uid://d2l8uaoel5whd"
+
+[node name="Buttons" type="HBoxContainer" parent="." unique_id=1303572269]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="AvoidRoomButton" type="Button" parent="Buttons" unique_id=886023885]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Avoid Room"
+
+[node name="EquipButton" type="Button" parent="Buttons" unique_id=173374599]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "Equip"
+
+[node name="PotionButton" type="Button" parent="Buttons" unique_id=1417599352]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "Quaff"
+
+[node name="FightFistsWeapon" type="Button" parent="Buttons" unique_id=1266388412]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "Fight with fists"
+
+[node name="FightWeaponButton" type="Button" parent="Buttons" unique_id=576251714]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "Fight with weapon
+"
+
+[node name="HealthUI" type="Control" parent="." unique_id=1650843111]
+layout_mode = 1
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HealthBar" type="ProgressBar" parent="HealthUI" unique_id=271632211]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 0
+offset_right = 100.0
+offset_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme = ExtResource("2_0tnpc")
+show_percentage = false
+
+[node name="HealthText" type="Label" parent="HealthUI/HealthBar" unique_id=1375265347]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.5
+offset_top = -11.5
+offset_right = 0.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+
+[node name="StatsUI" type="Control" parent="." unique_id=1516384676]
+layout_mode = 1
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -20.0
+offset_right = -20.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="StatsUI" unique_id=478827127]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -144.0
+offset_bottom = 40.0
+grow_horizontal = 0
+
+[node name="RoomsCompletedLabel" type="Label" parent="StatsUI/VBoxContainer" unique_id=1386160427]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Rooms completed: 0"
+
+[node name="RoomsAvoidedLabel" type="Label" parent="StatsUI/VBoxContainer" unique_id=691797051]
+unique_name_in_owner = true
 layout_mode = 2
 
-[node name="DiscardContainer" type="Control" parent="Control/CenterContainer/MarginContainer/MarginContainer/HBoxContainer/MarginContainer3" unique_id=898971582]
+[node name="RoomsSinceLastAvoidLabel" type="Label" parent="StatsUI/VBoxContainer" unique_id=1826210991]
+unique_name_in_owner = true
 layout_mode = 2
-script = ExtResource("2_yqjtg")
-shape = SubResource("Resource_vtaks")
-metadata/_custom_type_script = "uid://bbi8i6vef3f6y"
+
+[node name="HealthPotionUsedLabel" type="Label" parent="StatsUI/VBoxContainer" unique_id=1132241048]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="CardsPlayedLabel" type="Label" parent="StatsUI/VBoxContainer" unique_id=1525826489]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="EquippedWeaponLabel" type="Label" parent="StatsUI/VBoxContainer" unique_id=1250584529]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Equipped weapon: None"
+
+[node name="HealthLabel" type="Label" parent="StatsUI/VBoxContainer" unique_id=2124979409]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="MaxHealthLabel" type="Label" parent="StatsUI/VBoxContainer" unique_id=1421850584]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="RoomCardCountLabel" type="Label" parent="StatsUI/VBoxContainer" unique_id=1336287070]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="GameOverScreen" type="Control" parent="." unique_id=565928003]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="GameOverScreen" unique_id=384621638]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_0tnpc")
+theme_type_variation = &"GameBackground"
+
+[node name="CenterContainer" type="CenterContainer" parent="GameOverScreen" unique_id=1399794456]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameOverScreen/CenterContainer" unique_id=1346950503]
+layout_mode = 2
+
+[node name="GameOverLabel" type="Label" parent="GameOverScreen/CenterContainer/VBoxContainer" unique_id=2023307553]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Game Over"
+horizontal_alignment = 1
+
+[node name="ReasonLabel" type="Label" parent="GameOverScreen/CenterContainer/VBoxContainer" unique_id=590128266]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GameOverScreen/CenterContainer/VBoxContainer" unique_id=1955321207]
+layout_mode = 2
+
+[node name="RestartGameButton" type="Button" parent="GameOverScreen/CenterContainer/VBoxContainer/HBoxContainer" unique_id=257819566]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Restart "

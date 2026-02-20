@@ -1,7 +1,45 @@
 [gd_scene format=3 uid="uid://c7x70cqxtvb3k"]
 
 [ext_resource type="Script" uid="uid://cubhjjnwvxhjc" path="res://scenes/card_layouts/card_front.gd" id="1_m7hbj"]
-[ext_resource type="Theme" uid="uid://cuh2scwrf3ncj" path="res://ui_themes/game_theme.tres" id="2_rwu6v"]
+[ext_resource type="Theme" uid="uid://c8dfshyx0rl25" path="res://resources/game_theme.tres" id="2_ig7x4"]
+[ext_resource type="Texture2D" uid="uid://css2yf6avgkk2" path="res://resources/Arrow.svg" id="3_ddcdo"]
+
+[sub_resource type="Animation" id="Animation_go2ax"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_fuc25"]
+resource_name = "arrow_hovering"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 20), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h4ean"]
+_data = {
+&"RESET": SubResource("Animation_go2ax"),
+&"arrow_hovering": SubResource("Animation_fuc25")
+}
 
 [node name="CardLayout" type="SubViewportContainer" unique_id=1023136323]
 offset_right = 80.0
@@ -12,24 +50,29 @@ metadata/layout_id = "selected_card"
 metadata/tags = []
 metadata/_custom_type_script = "uid://dm115oleoggyt"
 
-[node name="SubViewport" type="SubViewport" parent="." unique_id=756622926]
+[node name="SubViewport" type="SubViewport" parent="." unique_id=268292962]
 handle_input_locally = false
-size = Vector2i(80, 112)
+size = Vector2i(80, 196)
 render_target_update_mode = 4
 
-[node name="PanelContainer" type="PanelContainer" parent="SubViewport" unique_id=1724690919]
-anchors_preset = 15
+[node name="CardType" type="Label" parent="SubViewport" unique_id=2120453866]
+unique_name_in_owner = true
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
+text = "Monster"
+
+[node name="Control" type="Control" parent="SubViewport" unique_id=331063038]
+layout_mode = 3
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 32.0
+offset_bottom = -40.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("2_rwu6v")
-theme_type_variation = &"SelectedCardOutline"
 
-[node name="Control" type="Control" parent="SubViewport/PanelContainer" unique_id=453655659]
-layout_mode = 2
-
-[node name="CardBackground" type="Panel" parent="SubViewport/PanelContainer/Control" unique_id=578814504]
+[node name="CardBackground" type="Panel" parent="SubViewport/Control" unique_id=1575029585]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -37,10 +80,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("2_rwu6v")
+theme = ExtResource("2_ig7x4")
 theme_type_variation = &"CardBackground"
 
-[node name="CardValue" type="Label" parent="SubViewport/PanelContainer/Control" unique_id=161834039]
+[node name="CardValue" type="Label" parent="SubViewport/Control" unique_id=1514216489]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 3.0
@@ -49,7 +92,7 @@ offset_right = 22.0
 offset_bottom = 22.0
 text = "10"
 
-[node name="CardSuite" type="Label" parent="SubViewport/PanelContainer/Control" unique_id=1333013391]
+[node name="CardSuite" type="Label" parent="SubViewport/Control" unique_id=435977836]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 3
@@ -57,10 +100,31 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -19.0
-offset_top = -25.0
-offset_right = -3.0
-offset_bottom = -2.0
+offset_left = 21.0
+offset_top = 47.0
+offset_right = 37.0
+offset_bottom = 70.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "♣️"
+
+[node name="SelectedIndicator" type="Control" parent="SubViewport" unique_id=1148512187]
+layout_mode = 3
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -16.0
+offset_top = -32.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="SubViewport/SelectedIndicator" unique_id=309859673]
+texture = ExtResource("3_ddcdo")
+centered = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewport/SelectedIndicator" unique_id=1484994053]
+root_node = NodePath("../Sprite2D")
+libraries/ = SubResource("AnimationLibrary_h4ean")
+autoplay = &"arrow_hovering"

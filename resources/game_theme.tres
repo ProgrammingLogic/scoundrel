@@ -1,0 +1,32 @@
+[gd_resource type="Theme" format=3 uid="uid://c8dfshyx0rl25"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ocbwa"]
+bg_color = Color(0.8862616, 0.88626146, 0.8862615, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.029506551, 0.029506566, 0.029506514, 1)
+border_blend = true
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ntlge"]
+bg_color = Color(0.104661755, 0.3744243, 0.2939335, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mfept"]
+bg_color = Color(0.6, 0.16470589, 0.15294118, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4qhqp"]
+bg_color = Color(0.06783383, 0.7047515, 0.51928467, 1)
+
+[resource]
+CardBackground/base_type = &"Panel"
+CardBackground/styles/panel = SubResource("StyleBoxFlat_ocbwa")
+GameBackground/base_type = &"Panel"
+GameBackground/styles/panel = SubResource("StyleBoxFlat_ntlge")
+HealthBar/base_type = &"ProgressBar"
+HealthBar/styles/background = SubResource("StyleBoxFlat_mfept")
+HealthBar/styles/fill = SubResource("StyleBoxFlat_4qhqp")
