@@ -57,6 +57,7 @@ var rooms_avoided = 0:
 @onready var avoid_room_button: Button = %AvoidRoomButton
 @onready var health_text: Label = %HealthText
 @onready var health_bar: ProgressBar = %HealthBar
+@onready var weapon_pile: CardPile = %WeaponPile
 
 signal game_over # Emiited with argument reason: String.
 signal health_changed # Emitted with argument new_value: int.
@@ -77,6 +78,8 @@ func _ready() -> void:
 	fight_fists_button.pressed.connect(_on_fight_fists_button_pressed)
 	potion_button.pressed.connect(_on_potion_button_pressed)
 	avoid_room_button.pressed.connect(_on_avoid_room_button_pressed)
+	equip_button.pressed.connect(_on_equip_button_pressed)
+	fight_weapon_button.pressed.connect(_on_fight_with_weapon_button_pressed)
 
 	%RestartGameButton.pressed.connect(restart_game)
 
@@ -105,6 +108,7 @@ func start_game() -> void:
 	max_health = 20
 	health = max_health
 	rooms_since_last_avoid = 0
+	equipped_weapon = null
 	deck.shuffle()
 	fill_room()
 	%CardArea.show()
@@ -119,9 +123,9 @@ func restart_game() -> void:
 		room.remove_card(card)
 		deck.add_card(card)
 
-	#var room_cards = room.cards
-	#deck.add_cards(room_cards)
-	while discard.get_card_count() != 0:
+	discard_weapon_pile()
+
+	while discard.get_card_count() > 0:
 		var card = discard.draw_card()
 		deck.add_card(card)
 
@@ -303,6 +307,71 @@ func _on_avoid_room_button_pressed() -> void:
 
 	rooms_avoided += 1
 	fill_room()
+
+
+func _on_equip_button_pressed() -> void:
+	var selected_card := room.selected_card
+
+	if selected_card == null:
+		return
+
+	var card_data := selected_card.card_data as ScoundrelCardResource
+
+	if card_data.card_type != "weapon":
+		return
+
+	if equipped_weapon != null:
+		while weapon_pile.get_card_count() > 0:
+			var card = weapon_pile.draw_card()
+			discard.add_card(card)
+
+	equipped_weapon = selected_card
+	weapon_pile.add_card(equipped_weapon)
+	card_played.emit(equipped_weapon)
+
+
+func _on_fight_with_weapon_button_pressed() -> void:
+	if equipped_weapon == null:
+		return
+
+	var equipped_weapon_data = equipped_weapon.card_data as ScoundrelCardResource
+
+	var selected_card := room.selected_card
+
+	if selected_card == null:
+		return
+
+	var card_data = selected_card.card_data as ScoundrelCardResource
+
+	if card_data.card_type != "monster":
+		return
+
+	var top_card = weapon_pile.peek_top()
+	var top_card_data = top_card.card_data as ScoundrelCardResource
+
+	# If the monster previosuly slain by the weapon is less powerful then this
+	#	monster, then we cannot use this weapon to defeat it.
+	if top_card_data.card_type != "weapon" and card_data.value > top_card_data.value:
+		return
+
+	var damage = max(0, card_data.value - equipped_weapon_data.value)
+	health = health - damage
+	weapon_pile.add_card(selected_card)
+
+	# If this monster's value is equal to the monster that was previously killed
+	#	by this weapon, then this weapon is destroyed.
+	if top_card_data.card_type != "weapon" and top_card_data.value == card_data.value:
+		discard_weapon_pile()
+
+	card_played.emit(selected_card)
+
+
+func discard_weapon_pile() -> void:
+	while weapon_pile.get_card_count() > 0:
+		var card = weapon_pile.draw_card()
+		discard.add_card(card)
+
+	equipped_weapon = null
 
 
 func _on_game_over(reason: String):
