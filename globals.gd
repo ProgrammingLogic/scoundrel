@@ -4,9 +4,10 @@ extends Node
 var deck_manager: CardDeckManager
 var game: Control
 var room: CardHand
+var room_max_cards: int = 4
 var deck: CardPile
 var selected_indicator: SelectedIndicator
-var card_size: Vector2 = Vector2()
+var card_size: Vector2 = Vector2(80, 120)
 var theme: Theme = preload("res://resources/game_theme.tres")
 
 enum Cards {

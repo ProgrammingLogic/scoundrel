@@ -24,7 +24,7 @@ metadata/_custom_type_script = "uid://dm115oleoggyt"
 
 [node name="SubViewport" type="SubViewport" parent="." unique_id=1236356306]
 handle_input_locally = false
-size = Vector2i(80, 112)
+size = Vector2i(80, 122)
 render_target_update_mode = 4
 
 [node name="CardBackground" type="Panel" parent="SubViewport" unique_id=1854135901]
