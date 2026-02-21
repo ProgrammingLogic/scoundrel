@@ -183,7 +183,7 @@ func remove_card(card: Card) -> Card:
 	else:
 
 		_on_card_child_exiting(card)
-	
+
 	return card
 
 ## Removes all cards from the pile. [color=red]Does NOT free the cards.[/color]
@@ -387,18 +387,18 @@ func _on_card_child_exiting(node: Node) -> void:
 	var card: Card = node as Card
 	if not _cards.has(card):
 		return
-	
+
 	_cards.erase(card)
-	
+
 	card.visible = true
 	card.disabled = false
 	_on_card_removed(card)
 	card_removed.emit(card)
 	pile_changed.emit(_cards.size())
-	
+
 	if _cards.is_empty():
 		pile_emptied.emit()
-	
+
 	arrange()
 
 #endregion

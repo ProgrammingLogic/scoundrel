@@ -50,14 +50,8 @@ var rooms_avoided = 0:
 @onready var deck: CardPile = %Deck
 @onready var room: CardRoom = %Room
 @onready var discard: CardPile = %Discard
-@onready var equip_button: Button = %EquipButton
-@onready var potion_button: Button = %PotionButton
-@onready var fight_fists_button: Button = %FightFistsWeapon
-@onready var fight_weapon_button: Button = %FightWeaponButton
-@onready var avoid_room_button: Button = %AvoidRoomButton
 @onready var health_text: Label = %HealthText
 @onready var health_bar: ProgressBar = %HealthBar
-@onready var weapon_pile: CardPile = %WeaponPile
 
 signal game_over # Emiited with argument reason: String.
 signal health_changed # Emitted with argument new_value: int.
@@ -68,6 +62,18 @@ signal room_completed
 
 
 func _ready() -> void:
+
+#region Global variables
+	Globals.game = self
+	Globals.deck_manager = deck_manager
+	Globals.deck = deck
+	Globals.selected_indicator = %SelectedIndicator
+
+	CG.def_front_layout = LayoutID.CARD_FRONT
+	CG.def_back_layout = LayoutID.CARD_BACK
+#endregion
+
+#region Signals
 	room.card_selected.connect(_on_card_selected)
 	health_changed.connect(_on_health_changed)
 	max_health_changed.connect(_on_max_health_changed)
@@ -75,30 +81,30 @@ func _ready() -> void:
 	room_completed.connect(_on_room_completed)
 	game_over.connect(_on_game_over)
 
-	fight_fists_button.pressed.connect(_on_fight_fists_button_pressed)
-	potion_button.pressed.connect(_on_potion_button_pressed)
-	avoid_room_button.pressed.connect(_on_avoid_room_button_pressed)
-	equip_button.pressed.connect(_on_equip_button_pressed)
-	fight_weapon_button.pressed.connect(_on_fight_with_weapon_button_pressed)
-
-	%RestartGameButton.pressed.connect(restart_game)
-
 	room.card_added.connect(func(card: Card, index: int): %RoomCardCountLabel.text = "Room card count: %d" % room.get_card_count())
 	room.card_removed.connect(func(card: Card, index: int): %RoomCardCountLabel.text = "Room card count: %d" % room.get_card_count())
+#endregion
+
+#region Game scene UI buttons
+	%FightFistsButton.pressed.connect(_on_fight_fists_button_pressed)
+	%PotionButton.pressed.connect(_on_potion_button_pressed)
+	%AvoidRoomButton.pressed.connect(_on_avoid_room_button_pressed)
+	%EquipButton.pressed.connect(_on_equip_button_pressed)
+	%FightWeaponButton.pressed.connect(_on_fight_with_weapon_button_pressed)
+#endregion
+
+#region Game over scene UI buttons
+	%RestartGameButton.pressed.connect(restart_game)
+#endregion
 
 
-	CG.def_front_layout = LayoutID.CARD_FRONT
-	CG.def_back_layout = LayoutID.CARD_BACK
-
-	Globals.game = self
-	Globals.deck_manager = deck_manager
-	Globals.deck = deck
-
+#region Setup the game
 	deck_manager.deck = create_deck()
 	deck_manager.starting_pile = deck
 	deck_manager.setup()
 
 	start_game()
+#endregion
 
 
 func start_game() -> void:
@@ -109,8 +115,10 @@ func start_game() -> void:
 	health = max_health
 	rooms_since_last_avoid = 0
 	equipped_weapon = null
+
 	deck.shuffle()
 	fill_room()
+
 	%CardArea.show()
 	%Buttons.show()
 	%GameOverScreen.hide()
@@ -192,11 +200,23 @@ func create_deck() -> CardDeck:
 
 
 func reset_button_view() -> void:
-	avoid_room_button.show()
-	equip_button.hide()
-	potion_button.hide()
-	fight_fists_button.hide()
-	fight_weapon_button.hide()
+	%AvoidRoomButton.show()
+	%EquipButton.hide()
+	%PotionButton.hide()
+	%FightFistsButton.hide()
+	%FightWeaponButton.hide()
+
+
+func discard_weapon_pile() -> void:
+	while %EquippedWeaponPile.get_card_count() > 0:
+		var card = %EquippedWeaponPile.draw_card()
+		discard.add_card(card)
+
+	while %SlainEnemyPile.get_card_count() > 0:
+		var card = %SlainEnemyPile.draw_card()
+		discard.add_card(card)
+
+	equipped_weapon = null
 
 
 func _input(event: InputEvent) -> void:
@@ -209,28 +229,28 @@ func _on_card_selected(card: Card) -> void:
 
 	match card_data.card_type:
 		"monster":
-			fight_fists_button.show()
+			%FightFistsButton.show()
 
 			if equipped_weapon != null:
-				fight_weapon_button.show()
+				%FightWeaponButton.show()
 			else:
-				fight_weapon_button.hide()
+				%FightWeaponButton.hide()
 
-			equip_button.hide()
-			potion_button.hide()
+			%EquipButton.hide()
+			%PotionButton.hide()
 
 		"weapon":
-			equip_button.show()
+			%EquipButton.show()
 
-			potion_button.hide()
-			fight_fists_button.hide()
-			fight_weapon_button.hide()
+			%PotionButton.hide()
+			%FightFistsButton.hide()
+			%FightWeaponButton.hide()
 		"potion":
-			potion_button.show()
+			%PotionButton.show()
 
-			equip_button.hide()
-			fight_fists_button.hide()
-			fight_weapon_button.hide()
+			%EquipButton.hide()
+			%FightFistsButton.hide()
+			%FightWeaponButton.hide()
 
 
 func _on_health_changed(new_health: int) -> void:
@@ -330,12 +350,10 @@ func _on_equip_button_pressed() -> void:
 		return
 
 	if equipped_weapon != null:
-		while weapon_pile.get_card_count() > 0:
-			var card = weapon_pile.draw_card()
-			discard.add_card(card)
+		discard_weapon_pile()
 
 	equipped_weapon = selected_card
-	weapon_pile.add_card(equipped_weapon)
+	%EquippedWeaponPile.add_card(equipped_weapon)
 	card_played.emit(equipped_weapon)
 
 
@@ -344,43 +362,48 @@ func _on_fight_with_weapon_button_pressed() -> void:
 		return
 
 	var equipped_weapon_data = equipped_weapon.card_data as ScoundrelCardResource
-
 	var selected_card := room.selected_card
 
 	if selected_card == null:
 		return
 
-	var card_data = selected_card.card_data as ScoundrelCardResource
+	var monster_data = selected_card.card_data as ScoundrelCardResource
+	assert(monster_data.card_type == "monster")
 
-	if card_data.card_type != "monster":
+	var last_monster = %SlainEnemyPile.peek_top()
+
+	if last_monster == null:
+		slay_monster_with_weapon(equipped_weapon, selected_card)
+		card_played.emit(selected_card)
 		return
 
-	var top_card = weapon_pile.peek_top()
-	var top_card_data = top_card.card_data as ScoundrelCardResource
+	var last_monster_data = last_monster.card_data as ScoundrelCardResource
+	assert(last_monster_data.card_type == "monster")
 
 	# If the monster previosuly slain by the weapon is less powerful then this
 	#	monster, then we cannot use this weapon to defeat it.
-	if top_card_data.card_type != "weapon" and card_data.value > top_card_data.value:
+	if monster_data.value > last_monster_data.value:
 		return
 
-	var damage = max(0, card_data.value - equipped_weapon_data.value)
-	health = health - damage
-	weapon_pile.add_card(selected_card)
+	slay_monster_with_weapon(equipped_weapon, selected_card)
 
 	# If this monster's value is equal to the monster that was previously killed
 	#	by this weapon, then this weapon is destroyed.
-	if top_card_data.card_type != "weapon" and top_card_data.value == card_data.value:
+	if monster_data.value == last_monster_data.value:
 		discard_weapon_pile()
 
 	card_played.emit(selected_card)
 
 
-func discard_weapon_pile() -> void:
-	while weapon_pile.get_card_count() > 0:
-		var card = weapon_pile.draw_card()
-		discard.add_card(card)
+func slay_monster_with_weapon(weapon: Card, monster: Card):
+	var weapon_card_data = weapon.card_data as ScoundrelCardResource
+	var monster_card_data = monster.card_data as ScoundrelCardResource
 
-	equipped_weapon = null
+	var damage = max(0, monster_card_data.value - weapon_card_data.value)
+	health = health - damage
+	## TODO
+	# - Figure out why the slain enemy is not going on top of the pile
+	%SlainEnemyPile.add_card(monster)
 
 
 func _on_game_over(reason: String):

@@ -3,8 +3,6 @@ class_name CardFrontLayout extends CardLayout
 @onready var card_background: Panel = %CardBackground
 @onready var card_value: Label = %CardValue
 @onready var card_suite: Label = %CardSuite
-@onready var card_type: Label = %CardType
-@onready var selected_indicator_sprite = %Sprite2D
 
 
 func _update_display() -> void:
@@ -41,20 +39,25 @@ func _update_display() -> void:
 		_:
 			card_value.text = "%d" % [data.value]
 
-	match data.card_type:
-		"weapon":
-			card_type.text = "Weapon"
-		"monster":
-			card_type.text = "Monster"
-		"potion":
-			card_type.text = "Potion"
-
 
 ## Show the selection indicator for the card layout.
 func select():
-	selected_indicator_sprite.show()
+	var selected_indicator_size: Vector2 = Globals.selected_indicator.size
+	var center = size
+	var bottom_center = Vector2(center.x, center.y + size.y)
+
+	# Scaling by the selected indicator's size Y was required for it to show at
+	#	the bottom of the card, I have no idea why.
+	var global_bottom_center = Vector2(
+		global_position.x + size.x / 2,
+		global_position.y + size.y / 2 + selected_indicator_size.y,
+	)
+
+	Globals.selected_indicator.show()
+	Globals.selected_indicator.position = global_bottom_center
+
 
 
 ## Hide the selection indicator for the card layout.
 func deselect():
-	selected_indicator_sprite.hide()
+	Globals.selected_indicator.hide()

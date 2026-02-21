@@ -2,49 +2,12 @@
 
 [ext_resource type="Script" uid="uid://cubhjjnwvxhjc" path="res://scenes/card_layouts/card_front.gd" id="1_i3j66"]
 [ext_resource type="Theme" uid="uid://c8dfshyx0rl25" path="res://resources/game_theme.tres" id="2_h5ggx"]
-[ext_resource type="Texture2D" uid="uid://css2yf6avgkk2" path="res://resources/Arrow.svg" id="3_ud2kj"]
-
-[sub_resource type="Animation" id="Animation_go2ax"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_fuc25"]
-resource_name = "arrow_hovering"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, 20), Vector2(0, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_hk2qm"]
-_data = {
-&"RESET": SubResource("Animation_go2ax"),
-&"arrow_hovering": SubResource("Animation_fuc25")
-}
 
 [node name="CardLayout" type="SubViewportContainer" unique_id=750627426]
 offset_right = 80.0
 offset_bottom = 112.0
 script = ExtResource("1_i3j66")
+anim_group_checked = null
 metadata/is_layout = true
 metadata/layout_id = "card_front"
 metadata/tags = []
@@ -56,20 +19,11 @@ handle_input_locally = false
 size = Vector2i(80, 210)
 render_target_update_mode = 4
 
-[node name="CardType" type="Label" parent="SubViewport" unique_id=1439979243]
-unique_name_in_owner = true
-anchors_preset = -1
-anchor_left = 0.5
-anchor_right = 0.5
-grow_horizontal = 2
-text = "Monster"
-
 [node name="Control" type="Control" parent="SubViewport" unique_id=1753383014]
 layout_mode = 3
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 32.0
-offset_bottom = -56.0
+offset_bottom = -88.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -108,27 +62,3 @@ offset_bottom = -4.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "♣️"
-
-[node name="SelectedIndicator" type="Control" parent="SubViewport" unique_id=1836802716]
-custom_minimum_size = Vector2(32, 52)
-layout_mode = 3
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -16.0
-offset_top = -52.0
-offset_right = 16.0
-grow_horizontal = 2
-grow_vertical = 0
-
-[node name="Sprite2D" type="Sprite2D" parent="SubViewport/SelectedIndicator" unique_id=1274582377]
-unique_name_in_owner = true
-visible = false
-texture = ExtResource("3_ud2kj")
-centered = false
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewport/SelectedIndicator" unique_id=361161462]
-root_node = NodePath("../Sprite2D")
-libraries/ = SubResource("AnimationLibrary_hk2qm")
-autoplay = &"arrow_hovering"

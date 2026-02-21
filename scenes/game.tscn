@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://cle02hultetj5" path="res://addons/simple_cards/hand/shape/premade_shapes/stack_shape.gd" id="5_p57ef"]
 [ext_resource type="Script" uid="uid://qd3kangeiqg" path="res://addons/simple_cards/hand/shape/premade_shapes/grid_shape.gd" id="6_p57ef"]
 [ext_resource type="Script" uid="uid://dmfx5vyih4nu2" path="res://scenes/room.gd" id="8_0tnpc"]
+[ext_resource type="PackedScene" uid="uid://dwce1pffrbqog" path="res://scenes/card_layouts/selected_indicator.tscn" id="10_vtaks"]
 
 [sub_resource type="Resource" id="Resource_gee14"]
 script = ExtResource("4_u5sy4")
@@ -25,11 +26,12 @@ num_of_rows = 1
 metadata/_custom_type_script = "uid://qd3kangeiqg"
 
 [sub_resource type="Resource" id="Resource_kvpfn"]
-script = ExtResource("6_p57ef")
-num_of_cols = 12
-num_of_rows = 1
-col_offset = 50.0
-metadata/_custom_type_script = "uid://qd3kangeiqg"
+script = ExtResource("5_p57ef")
+metadata/_custom_type_script = "uid://cle02hultetj5"
+
+[sub_resource type="Resource" id="Resource_dinhu"]
+script = ExtResource("5_p57ef")
+metadata/_custom_type_script = "uid://cle02hultetj5"
 
 [sub_resource type="Resource" id="Resource_vtaks"]
 script = ExtResource("5_p57ef")
@@ -116,11 +118,23 @@ enable_reordering = false
 max_hand_size = 4
 metadata/_custom_type_script = "uid://bbi8i6vef3f6y"
 
-[node name="WeaponPile" type="Control" parent="CardArea/CenterContainer/HBoxContainer/VBoxContainer" unique_id=1622849792]
+[node name="WeaponArea" type="HBoxContainer" parent="CardArea/CenterContainer/HBoxContainer/VBoxContainer" unique_id=933470319]
+layout_mode = 2
+
+[node name="EquippedWeaponPile" type="Control" parent="CardArea/CenterContainer/HBoxContainer/VBoxContainer/WeaponArea" unique_id=1879439228]
 unique_name_in_owner = true
 layout_mode = 2
 script = ExtResource("4_iywne")
 shape = SubResource("Resource_kvpfn")
+show_cards = true
+face_up = true
+metadata/_custom_type_script = "uid://d2l8uaoel5whd"
+
+[node name="SlainEnemyPile" type="Control" parent="CardArea/CenterContainer/HBoxContainer/VBoxContainer/WeaponArea" unique_id=1622849792]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("4_iywne")
+shape = SubResource("Resource_dinhu")
 show_cards = true
 face_up = true
 metadata/_custom_type_script = "uid://d2l8uaoel5whd"
@@ -180,7 +194,7 @@ visible = false
 layout_mode = 2
 text = "Quaff"
 
-[node name="FightFistsWeapon" type="Button" parent="Buttons" unique_id=1266388412]
+[node name="FightFistsButton" type="Button" parent="Buttons" unique_id=1266388412]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
@@ -228,6 +242,7 @@ horizontal_alignment = 1
 
 [node name="StatsUI" type="Control" parent="." unique_id=1516384676]
 layout_mode = 1
+anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -335,3 +350,9 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 text = "Restart "
+
+[node name="GameObjects" type="Node2D" parent="." unique_id=1191057381]
+
+[node name="SelectedIndicator" parent="GameObjects" unique_id=1804448496 instance=ExtResource("10_vtaks")]
+unique_name_in_owner = true
+visible = false
