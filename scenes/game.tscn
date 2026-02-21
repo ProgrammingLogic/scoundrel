@@ -25,15 +25,15 @@ num_of_cols = 4
 num_of_rows = 1
 metadata/_custom_type_script = "uid://qd3kangeiqg"
 
+[sub_resource type="Resource" id="Resource_vtaks"]
+script = ExtResource("5_p57ef")
+metadata/_custom_type_script = "uid://cle02hultetj5"
+
 [sub_resource type="Resource" id="Resource_kvpfn"]
 script = ExtResource("5_p57ef")
 metadata/_custom_type_script = "uid://cle02hultetj5"
 
 [sub_resource type="Resource" id="Resource_dinhu"]
-script = ExtResource("5_p57ef")
-metadata/_custom_type_script = "uid://cle02hultetj5"
-
-[sub_resource type="Resource" id="Resource_vtaks"]
 script = ExtResource("5_p57ef")
 metadata/_custom_type_script = "uid://cle02hultetj5"
 
@@ -62,7 +62,7 @@ anchor_mode = 0
 [node name="CardDeckManager" type="Node" parent="." unique_id=177216011 node_paths=PackedStringArray("starting_pile")]
 script = ExtResource("2_u5sy4")
 deck = SubResource("Resource_gee14")
-starting_pile = NodePath("../CardArea/CenterContainer/HBoxContainer/MarginContainer/Deck")
+starting_pile = NodePath("../CardArea/CenterContainer/VBoxContainer/MarginContainer/DungeonArea/MarginContainer/Deck")
 metadata/_custom_type_script = "uid://bisyk4bowdvsf"
 
 [node name="CardArea" type="Control" parent="." unique_id=1891141614]
@@ -89,15 +89,22 @@ offset_right = 68.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CardArea/CenterContainer" unique_id=1308146457]
+[node name="VBoxContainer" type="VBoxContainer" parent="CardArea/CenterContainer" unique_id=1505075506]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="CardArea/CenterContainer/HBoxContainer" unique_id=1888588978]
+[node name="MarginContainer" type="MarginContainer" parent="CardArea/CenterContainer/VBoxContainer" unique_id=1332178153]
+layout_mode = 2
+theme_override_constants/margin_bottom = 50
+
+[node name="DungeonArea" type="HBoxContainer" parent="CardArea/CenterContainer/VBoxContainer/MarginContainer" unique_id=1308146457]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CardArea/CenterContainer/VBoxContainer/MarginContainer/DungeonArea" unique_id=1888588978]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/margin_right = 50
 
-[node name="Deck" type="Control" parent="CardArea/CenterContainer/HBoxContainer/MarginContainer" unique_id=467180820]
+[node name="Deck" type="Control" parent="CardArea/CenterContainer/VBoxContainer/MarginContainer/DungeonArea/MarginContainer" unique_id=467180820]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 4
@@ -106,10 +113,7 @@ shape = SubResource("Resource_u5sy4")
 show_cards = true
 metadata/_custom_type_script = "uid://d2l8uaoel5whd"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CardArea/CenterContainer/HBoxContainer" unique_id=1533213706]
-layout_mode = 2
-
-[node name="Room" type="Control" parent="CardArea/CenterContainer/HBoxContainer/VBoxContainer" unique_id=113512927]
+[node name="Room" type="Control" parent="CardArea/CenterContainer/VBoxContainer/MarginContainer/DungeonArea" unique_id=113512927]
 unique_name_in_owner = true
 layout_mode = 2
 script = ExtResource("8_0tnpc")
@@ -118,10 +122,25 @@ enable_reordering = false
 max_hand_size = 4
 metadata/_custom_type_script = "uid://bbi8i6vef3f6y"
 
-[node name="WeaponArea" type="HBoxContainer" parent="CardArea/CenterContainer/HBoxContainer/VBoxContainer" unique_id=933470319]
+[node name="MarginContainer2" type="MarginContainer" parent="CardArea/CenterContainer/VBoxContainer/MarginContainer/DungeonArea" unique_id=1293776737]
 layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/margin_left = 50
 
-[node name="EquippedWeaponPile" type="Control" parent="CardArea/CenterContainer/HBoxContainer/VBoxContainer/WeaponArea" unique_id=1879439228]
+[node name="Discard" type="Control" parent="CardArea/CenterContainer/VBoxContainer/MarginContainer/DungeonArea/MarginContainer2" unique_id=343424051]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("4_iywne")
+shape = SubResource("Resource_vtaks")
+show_cards = true
+face_up = true
+metadata/_custom_type_script = "uid://d2l8uaoel5whd"
+
+[node name="EquipmentArea" type="HBoxContainer" parent="CardArea/CenterContainer/VBoxContainer" unique_id=357750009]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="EquippedWeaponPile" type="Control" parent="CardArea/CenterContainer/VBoxContainer/EquipmentArea" unique_id=1879439228]
 unique_name_in_owner = true
 layout_mode = 2
 script = ExtResource("4_iywne")
@@ -130,25 +149,11 @@ show_cards = true
 face_up = true
 metadata/_custom_type_script = "uid://d2l8uaoel5whd"
 
-[node name="SlainEnemyPile" type="Control" parent="CardArea/CenterContainer/HBoxContainer/VBoxContainer/WeaponArea" unique_id=1622849792]
+[node name="SlainEnemyPile" type="Control" parent="CardArea/CenterContainer/VBoxContainer/EquipmentArea" unique_id=1622849792]
 unique_name_in_owner = true
 layout_mode = 2
 script = ExtResource("4_iywne")
 shape = SubResource("Resource_dinhu")
-show_cards = true
-face_up = true
-metadata/_custom_type_script = "uid://d2l8uaoel5whd"
-
-[node name="MarginContainer2" type="MarginContainer" parent="CardArea/CenterContainer/HBoxContainer" unique_id=1293776737]
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_constants/margin_left = 50
-
-[node name="Discard" type="Control" parent="CardArea/CenterContainer/HBoxContainer/MarginContainer2" unique_id=343424051]
-unique_name_in_owner = true
-layout_mode = 2
-script = ExtResource("4_iywne")
-shape = SubResource("Resource_vtaks")
 show_cards = true
 face_up = true
 metadata/_custom_type_script = "uid://d2l8uaoel5whd"

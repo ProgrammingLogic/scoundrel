@@ -1,13 +1,12 @@
 [gd_scene format=3 uid="uid://jmkosolrfcd8"]
 
 [ext_resource type="Script" uid="uid://cubhjjnwvxhjc" path="res://scenes/card_layouts/card_front.gd" id="1_i3j66"]
-[ext_resource type="Theme" uid="uid://c8dfshyx0rl25" path="res://resources/game_theme.tres" id="2_h5ggx"]
+[ext_resource type="Theme" uid="uid://8e0xkrspap8h" path="res://resources/card_theme.tres" id="2_h5ggx"]
 
 [node name="CardLayout" type="SubViewportContainer" unique_id=750627426]
 offset_right = 80.0
 offset_bottom = 112.0
 script = ExtResource("1_i3j66")
-anim_group_checked = null
 metadata/is_layout = true
 metadata/layout_id = "card_front"
 metadata/tags = []
@@ -16,16 +15,17 @@ metadata/_custom_type_script = "uid://dm115oleoggyt"
 [node name="SubViewport" type="SubViewport" parent="." unique_id=1170618356]
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(80, 210)
+size = Vector2i(80, 122)
 render_target_update_mode = 4
 
 [node name="Control" type="Control" parent="SubViewport" unique_id=1753383014]
 layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = -88.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_h5ggx")
 
 [node name="CardBackground" type="Panel" parent="SubViewport/Control" unique_id=173541812]
 unique_name_in_owner = true
@@ -40,25 +40,28 @@ theme_type_variation = &"CardBackground"
 
 [node name="CardValue" type="Label" parent="SubViewport/Control" unique_id=1656831183]
 unique_name_in_owner = true
-layout_mode = 0
-offset_left = 3.0
-offset_top = -1.0
-offset_right = 22.0
-offset_bottom = 22.0
-text = "10"
-
-[node name="CardSuite" type="Label" parent="SubViewport/Control" unique_id=579891742]
-unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = -1
+anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = -27.0
-offset_right = -4.0
-offset_bottom = -4.0
+offset_left = -24.0
+offset_top = -26.0
+offset_right = -5.0
+offset_bottom = -3.0
 grow_horizontal = 0
 grow_vertical = 0
-text = "♣️"
+theme_type_variation = &"CardTextColor"
+text = "10"
+
+[node name="CardType" type="Label" parent="SubViewport/Control" unique_id=1707992492]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_type_variation = &"PotionTextColor"
+text = "Monster"
+horizontal_alignment = 1

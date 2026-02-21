@@ -1,0 +1,14 @@
+[gd_resource type="Theme" format=3 uid="uid://8e0xkrspap8h"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ocjkj"]
+bg_color = Color(0.7666196, 0.76661956, 0.76661944, 1)
+
+[resource]
+CardBackground/base_type = &"Panel"
+CardBackground/styles/panel = SubResource("StyleBoxFlat_ocjkj")
+MonsterCard/base_type = &"Label"
+MonsterCard/colors/font_color = Color(0, 0, 0, 1)
+PotionCard/base_type = &"Label"
+PotionCard/colors/font_color = Color(0.7317526, 0.17430359, 0.2017045, 1)
+WeaponCard/base_type = &"Label"
+WeaponCard/colors/font_color = Color(0, 0, 0.8627451, 1)
